@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">小组作业</string>
+    <string name="button1">日出日落查询入口</string>
+    <string name="button2">菜单查询入口</string>
+    <string name="button3">字典查询入口</string>
+    <string name="button4">歌曲搜索查询入口</string>
+    <string name="hello_message">欢迎来到小组作业</string>
+</resources>
