@@ -5,5 +5,10 @@
     <string name="button3">Dictionary API \nBy: Mengying Liu</string>
     <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
     <string name="hello_message">Welcome to the final project</string>
+    <string name="translate_button">Translate</string>
+    <string name="hint">Enter the word.</string>
+    <string name="home">Home</string>
+    <string name="second">Saved Vocabulary</string>
+    <string name="third">Help</string>
 
 </resources>
