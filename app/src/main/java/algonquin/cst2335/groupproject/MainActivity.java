@@ -11,8 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import algonquin.cst2335.groupproject.databinding.ActivityMainBinding;
-import algonquin.cst2335.groupproject.mengyingAPI.DictionaryAPI;
+import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (id == R.id.item_3) {
 
-            Intent intent = new Intent(this, DictionaryAPI.class);
+            Intent intent = new Intent(this, Activity_DictionaryAPI.class);
             startActivity(intent);
             return true;
         }

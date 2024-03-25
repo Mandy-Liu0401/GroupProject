@@ -1,5 +1,6 @@
 package algonquin.cst2335.groupproject.mengyingAPI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivityDictionaryApiBinding;
-import algonquin.cst2335.groupproject.databinding.NotFoundBinding;
 import algonquin.cst2335.groupproject.databinding.SearchResultBinding;
 
 
@@ -19,11 +22,10 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class DictionaryAPI extends AppCompatActivity {
+public class Activity_DictionaryAPI extends AppCompatActivity {
     private RecyclerView.Adapter myAdapter;
     private VocabularyDAO vDao;
     ActivityDictionaryApiBinding binding ;
-
     ArrayList<Vocabulary> terms;
     DictionaryAPIViewModel dictionaryModel;
 
@@ -32,7 +34,27 @@ public class DictionaryAPI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDictionaryApiBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.myToolbar);
+        setSupportActionBar(binding.include1.myToolbar);
+
+        BottomNavigationView bottomNavigationView = binding.include2.bottomNavigation;
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.home_id);
+
+        // Perform item selected listener
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            int item_id = item.getItemId();
+            if ( item_id == R.id.home_id ) {
+                return true;
+            } else if ( item_id == R.id.second_id ) {
+                startActivity(new Intent(getApplicationContext(), Activity_Saved_Vocabulary.class));
+                return true;
+            } else if ( item_id == R.id.third_id ) {
+                startActivity(new Intent(getApplicationContext(), Activity_Help.class));
+                return true;
+            }
+            return false;
+        });
 
         VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
                 "database-name").build();
@@ -50,23 +72,24 @@ public class DictionaryAPI extends AppCompatActivity {
             {
                 terms.addAll( vDao.getAllTerms() ); //Once you get the data from database
 
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+                runOnUiThread( () ->  binding.currentRecycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
 
         //initialize RecyclerView after rotating
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.currentRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        binding.currentRecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 if (viewType == 0){
                     // For returned search result, inflate the search_result layout
                     SearchResultBinding binding = SearchResultBinding.inflate(getLayoutInflater(),parent,false);
-                    return new MyRowHolder(binding.getRoot());}
+
 
                 else {
-                    // For not found search result, inflate the snot found layout
-                    NotFoundBinding binding = NotFoundBinding.inflate(getLayoutInflater(),parent,false);
-                    return new MyRowHolder(binding.getRoot());}
+                    // For not found search result, raise a snackbar warning
+                    //NotFoundBinding binding = NotFoundBinding.inflate(getLayoutInflater(),parent,false);
+
+                }return new MyRowHolder(binding.getRoot());}
             }
 
             @Override

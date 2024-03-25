@@ -11,4 +11,5 @@
     <string name="home">首页</string>
     <string name="second">已保存的词库</string>
     <string name="third">帮助</string>
+    <string name="save_button">保存到我的词库</string>
 </resources>
