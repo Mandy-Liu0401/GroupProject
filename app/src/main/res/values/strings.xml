@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">GroupProject</string>
-    <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
-    <string name="button2">Recipe Search \nBy: Wenxin Li</string>
-    <string name="button3">Dictionary API \nBy: Mengying Liu</string>
-    <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
-    <string name="hello_message">Welcome to the final project</string>
+  <string name="app_name">GroupProject</string>
+  <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
+  <string name="button2">Recipe Search \nBy: Wenxin Li</string>
+  <string name="button3">Dictionary API \nBy: Mengying Liu</string>
+  <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
+  <string name="hello_message">Welcome to the final project</string>
 
 </resources>
