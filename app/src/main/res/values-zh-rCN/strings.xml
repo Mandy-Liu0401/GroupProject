@@ -6,4 +6,14 @@
     <string name="button3">字典查询入口</string>
     <string name="button4">歌曲搜索查询入口</string>
     <string name="hello_message">欢迎来到小组作业</string>
+    <string name="translate_button">查询翻译</string>
+    <string name="hint">请输入想要查询的词</string>
+    <string name="home">首页</string>
+    <string name="second">已保存的词库</string>
+    <string name="third">帮助</string>
+    <string name="save_button">保存到我的词库</string>
+    <string name="error_message">查询不到结果，请查询新词</string>
+    <string name="API_name">字典</string>
+    <string name="instruction_title">用户手册</string>
+    <string name="dialog_button_ok">已阅并关闭</string>
 </resources>

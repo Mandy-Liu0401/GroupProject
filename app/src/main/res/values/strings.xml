@@ -1,9 +1,21 @@
 <resources>
-  <string name="app_name">GroupProject</string>
-  <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
-  <string name="button2">Recipe Search \nBy: Wenxin Li</string>
-  <string name="button3">Dictionary API \nBy: Mengying Liu</string>
-  <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
-  <string name="hello_message">Welcome to the final project</string>
+
+    <string name="app_name">GroupProject</string>
+    <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
+    <string name="button2">Recipe Search \nBy: Wenxin Li</string>
+    <string name="button3">Dictionary API \nBy: Mengying Liu</string>
+    <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
+    <string name="hello_message">Welcome to the final project</string>
+    <string name="translate_button">Translate</string>
+    <string name="hint">Enter the word.</string>
+    <string name="home">New Search</string>
+    <string name="second">Saved Vocabulary</string>
+    <string name="third">Help</string>
+    <string name="save_button">Save to my Vocabulary</string>
+    <string name="error_message">No result found, please try another word.</string>
+    <string name="API_name">Dictionary API</string>
+    <string name="instruction_title">Instrcution for DIctionary API</string>
+    <string name="instruction_body">12121212121</string>
+    <string name="dialog_button_ok">DIsmiss</string>
 
 </resources>

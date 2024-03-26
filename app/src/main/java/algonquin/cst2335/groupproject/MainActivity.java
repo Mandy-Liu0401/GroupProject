@@ -2,28 +2,26 @@ package algonquin.cst2335.groupproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
 import algonquin.cst2335.groupproject.databinding.ActivityMainBinding;
-import algonquin.cst2335.groupproject.mengyingAPI.DictionaryAPI;
 import algonquin.cst2335.groupproject.zimeng.SunHome;
+import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());//load layout xml on main screen
-
-        setSupportActionBar(binding.myToolbar);//tool bar for 4 entrances
+        Toolbar toolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (id == R.id.item_3) {
 
-            Intent intent = new Intent(this, DictionaryAPI.class);
+            Intent intent = new Intent(this, Activity_DictionaryAPI.class);
             startActivity(intent);
             return true;
         }
