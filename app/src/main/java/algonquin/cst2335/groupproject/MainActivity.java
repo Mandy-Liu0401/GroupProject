@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
+import algonquin.cst2335.groupproject.databinding.ActivityMainBinding;
+import algonquin.cst2335.groupproject.zimeng.SunHome;
 import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.item_1) {
 
+            Intent intent = new Intent(MainActivity.this, SunHome.class);
+            startActivity(intent);
         }
 
         else if (id == R.id.item_2) {

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">GroupProject</string>
     <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
     <string name="button2">Recipe Search \nBy: Wenxin Li</string>
