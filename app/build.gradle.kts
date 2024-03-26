@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "algonquin.cst2335.groupproject"
-        minSdk = 24
+        minSdk = 22
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -44,4 +44,7 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.recyclerview:recyclerview:1.+")
+    //volley
+    implementation ("com.android.volley:volley:1.2.1")
+
 }

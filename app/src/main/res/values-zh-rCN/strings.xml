@@ -11,4 +11,8 @@
     <string name="home">首页</string>
     <string name="second">已保存的词库</string>
     <string name="third">帮助</string>
+    <string name="recipe_hint">请输入食谱</string>
+    <string name="search_recipe_button">查询</string>
+    <string name="recipe_title">食谱名称</string>
+    <string name="recipe_ID">食谱 ID</string>
 </resources>
