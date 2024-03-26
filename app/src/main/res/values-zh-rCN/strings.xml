@@ -12,4 +12,8 @@
     <string name="second">已保存的词库</string>
     <string name="third">帮助</string>
     <string name="save_button">保存到我的词库</string>
+    <string name="error_message">查询不到结果，请查询新词</string>
+    <string name="API_name">字典</string>
+    <string name="instruction_title">用户手册</string>
+    <string name="dialog_button_ok">已阅并关闭</string>
 </resources>

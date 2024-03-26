@@ -11,16 +11,16 @@ public class Vocabulary {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="ID")
-    public int id;
+    protected int id;
     @ColumnInfo(name="TERM")
     protected String term;
     @ColumnInfo(name="DEFINITION")
-    protected List<String> definitions;
+    protected String definitions;
 
     // Empty constructor required by Room
     public Vocabulary() { }
 
-    Vocabulary (String term, List<String> definitions){
+    Vocabulary (String term, String definitions){
         this.term = term;
         this.definitions = definitions;
     }
@@ -29,7 +29,14 @@ public class Vocabulary {
         return term;
     }
 
-    public List<String> getDefinitions() {
+    public void setTerm(String term) {
+        this.term = term;
+    }
+    public String getDefinitions() {
         return definitions;
+    }
+
+    public void setDefinitions(String definitions) {
+        this.definitions = definitions;
     }
 }

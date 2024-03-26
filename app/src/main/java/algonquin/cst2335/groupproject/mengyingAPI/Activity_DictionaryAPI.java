@@ -1,28 +1,44 @@
 package algonquin.cst2335.groupproject.mengyingAPI;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
-import algonquin.cst2335.groupproject.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import algonquin.cst2335.groupproject.databinding.ActivityDictionaryApiBinding;
-import algonquin.cst2335.groupproject.databinding.SearchResultBinding;
+import algonquin.cst2335.groupproject.R;
+
 
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class Activity_DictionaryAPI extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
+    private static final String URL_TAG = "DICTIONARY_API";
+    private static final String URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+    private TextView wordTextView;
+    private TextView definitionTextView;
+    private RequestQueue queue;
+
+    // Define a key for the SharedPreferences
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String USER_INPUT_KEY = "user_input";
+
     private RecyclerView.Adapter myAdapter;
     private VocabularyDAO vDao;
     ActivityDictionaryApiBinding binding ;
@@ -34,7 +50,19 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDictionaryApiBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.include1.myToolbar);
+
+        // Initialize SharedPreferences
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        // Restore the user input from SharedPreferences
+        String savedInput = prefs.getString(USER_INPUT_KEY, "");
+        binding.editText.setText(savedInput);
+
+        //initialize two textView and set initial values to null.
+        wordTextView = binding.wordTextView;
+        definitionTextView = binding.definitionTextView;
+        wordTextView.setText("");
+        definitionTextView.setText("");
 
         BottomNavigationView bottomNavigationView = binding.include2.bottomNavigation;
         // Set Home selected
@@ -50,76 +78,103 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Activity_Saved_Vocabulary.class));
                 return true;
             } else if ( item_id == R.id.third_id ) {
-                startActivity(new Intent(getApplicationContext(), Activity_Help.class));
-                return true;
+                // Display AlertDialog with instructions
+                showInstructionsAlertDialog();
+                return false;
             }
             return false;
         });
 
-        VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
-                "database-name").build();
-        vDao = db.vDAO();
+        // Instantiate the RequestQueue.
+        queue = Volley.newRequestQueue(this);
 
-        //the ViewModel will keep a version of your ArrayList of data
-        // so that it survives orientation changes of your app
-        dictionaryModel = new ViewModelProvider(this).get(DictionaryAPIViewModel.class);
-        terms = dictionaryModel.terms.getValue();
+        binding.translateButton.setOnClickListener(v -> {
+            // Get the text from EditText
+            String userInput = binding.editText.getText().toString().trim();
 
-        if(terms == null) {
-            dictionaryModel.terms.setValue( terms = new ArrayList<>());
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                terms.addAll( vDao.getAllTerms() ); //Once you get the data from database
+            // Save the user input to SharedPreferences
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString(USER_INPUT_KEY, userInput);
+            editor.apply();
 
-                runOnUiThread( () ->  binding.currentRecycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-            });
-        }
-
-        //initialize RecyclerView after rotating
-        binding.currentRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        binding.currentRecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
-            public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                if (viewType == 0){
-                    // For returned search result, inflate the search_result layout
-                    SearchResultBinding binding = SearchResultBinding.inflate(getLayoutInflater(),parent,false);
-
-
-                else {
-                    // For not found search result, raise a snackbar warning
-                    //NotFoundBinding binding = NotFoundBinding.inflate(getLayoutInflater(),parent,false);
-
-                }return new MyRowHolder(binding.getRoot());}
-            }
-
-            @Override
-            //where you set the objects in your layout for the row.
-            //set the data for your ViewHolder object that will go at row position in the list
-            public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                Vocabulary obj = terms.get(position);
-                holder.messageText.setText(obj.getMessage());
-                holder.timeText.setText(obj.getTimeSent());
-            }
-
-            @Override
-            public int getItemCount() {
-                return terms.size();
-            }
-
-            @Override
-            public int getItemViewType(int position){
-                Vocabulary term = terms.get(position);
-                return term.isFound() ? 0 : 1;
-            }
-
+            // Construct the complete URL by appending the user input
+            String my_url = URL+userInput;
+            fetchDictionary(my_url);
         });
 
-        binding.translateButton.setOnClickListener(click -> sendMessage(true));
-        binding.receiveButton.setOnClickListener(click -> sendMessage(false));
+        String savedUserInput = prefs.getString("LoginName", "");
     }
+
+    private void fetchDictionary(String url) {
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
+                    // Display "word" and "definitions" of the response string.
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+
+                // only 1 object
+                JSONObject entry = jsonArray.getJSONObject(0);
+                String word = entry.getString("word");
+
+                JSONArray meaningsArray = entry.getJSONArray("meanings");
+                StringBuilder definitionsBuilder = new StringBuilder();
+
+                int definitionCount = 0;
+                int maxDefinitionTolist = 5;
+
+                for (int j = 0; j < meaningsArray.length(); j++) {
+                    JSONObject meaning = meaningsArray.getJSONObject(j);
+                    String partOfSpeech = meaning.getString("partOfSpeech");
+                    JSONArray definitionsArray = meaning.getJSONArray("definitions");
+
+                    for (int k = 0; k < definitionsArray.length(); k++) {
+                        JSONObject definitionObject = definitionsArray.getJSONObject(k);
+                        String definition = definitionObject.getString("definition");
+                        definitionsBuilder.append(partOfSpeech).append(": ").append(definition).append("\n\n");
+                        definitionCount++;
+                        if (definitionCount >= maxDefinitionTolist){break;}
+                    }
+                    if (definitionCount >= maxDefinitionTolist){break;}
+                }
+
+                runOnUiThread(() -> {
+                    wordTextView.setText(word);
+                    definitionTextView.setText(definitionsBuilder.toString());
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Snackbar.make(findViewById(android.R.id.content), R.string.error_message, Snackbar.LENGTH_LONG).show();
+                wordTextView.setText("");
+                definitionTextView.setText("");
+            }
+        },
+        error -> {Snackbar.make(findViewById(android.R.id.content), R.string.error_message, Snackbar.LENGTH_LONG).show();
+            wordTextView.setText("");
+            definitionTextView.setText("");}
+        );
+        // Add TAG to request
+        stringRequest.setTag(URL_TAG);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (queue != null) {
+            queue.cancelAll(URL_TAG);
+            //queue.stop();
         }
     }
 
+    // Method to show AlertDialog with instructions
+    protected void showInstructionsAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-
+        builder.setTitle(getString(R.string.instruction_title))
+                .setMessage(getString(R.string.instruction_body))
+                .setNegativeButton(getString(R.string.dialog_button_ok), (dialog, which) -> {
+                    dialog.dismiss();
+                }).show();
+    }
 }
