@@ -7,67 +7,118 @@
     tools:context=".wenxinAPI.RecipesActivity">
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/myToolbar"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="160dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="160dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecipeRecycleView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecipeRecycleView"
+        android:layout_width="417dp"
+        android:layout_height="394dp"
 
-            app:layout_constraintTop_toBottomOf="@id/myToolbar"
-            app:layout_constraintBottom_toTopOf="@id/enterRecipe"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/enterRecipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
 
-            />
+        app:layout_constraintTop_toBottomOf="@id/myToolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <EditText
+        android:id="@+id/enterRecipe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/recipe_hint"
 
-        <EditText
-            android:id="@+id/enterRecipe"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:hint="@string/recipe_hint"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/searchRecipeButton"
-            app:layout_constraintStart_toStartOf="parent"
-
-
-            />
-
-        <Button
-            android:id="@+id/searchRecipeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_recipe_button"
-
-            app:layout_constraintBottom_toBottomOf="@id/enterRecipe"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/enterRecipe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/searchRecipeButton"
+        app:layout_constraintStart_toStartOf="parent"
 
 
-            />
+        />
+
+    <Button
+        android:id="@+id/searchRecipeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_recipe_button"
+
+        app:layout_constraintBottom_toBottomOf="@id/enterRecipe"
+        app:layout_constraintEnd_toEndOf="parent"
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@id/enterRecipe" />
+
+    <ImageView
+        android:id="@+id/detailImage"
+
+        android:layout_width="104dp"
+        android:layout_height="87dp"
+
+        app:layout_constraintBottom_toTopOf="@id/enterRecipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView"
+
+
+        app:layout_constraintVertical_bias="0.208"
+        app:srcCompat="@drawable/recipe" />
+
+    <TextView
+        android:id="@+id/inDeatilSuammry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        android:text="TextView"
+
+
+        app:layout_constraintBottom_toBottomOf="@id/detailImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toEndOf="@id/detailImage"
+
+        app:layout_constraintTop_toTopOf="@id/detailImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/inDetailSourceURL"
+        android:layout_width="176dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
+
+        app:layout_constraintStart_toEndOf="@id/detailImage"
+        app:layout_constraintTop_toBottomOf="@id/inDeatilSuammry" />
+
+    <Button
+        android:id="@+id/recipeSaveButton"
+        android:layout_width="119dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="296dp"
+        android:text="@string/recipe_save"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
