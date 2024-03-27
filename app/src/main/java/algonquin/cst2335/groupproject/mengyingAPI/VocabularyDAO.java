@@ -20,4 +20,7 @@ public interface VocabularyDAO {
 
     @Query("DELETE FROM Vocabulary")
     void deleteAllTerms();
+
+    @Query("SELECT * FROM Vocabulary WHERE TERM = :input")
+    Vocabulary findTermByInput(String input);
 }

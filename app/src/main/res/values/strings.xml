@@ -23,4 +23,6 @@
     <string name="dialog_button_yes">Yes</string>
     <string name="snackbar_message">You deleted term: </string>
     <string name="undo_button">UNDO</string>
+    <string name="save_successful">Vocabulary saved successfully.</string>
+    <string name="save_unsuccessful">Vocabulary already exists.</string>
 </resources>

@@ -29,6 +29,8 @@ import algonquin.cst2335.groupproject.R;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Activity_DictionaryAPI extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -107,14 +109,34 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             fetchDictionary(my_url);
         });
 
+        VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
+                "vocabulary_db").allowMainThreadQueries().build();
 
         // Set up save_button click listener
         binding.saveButton.setOnClickListener(click-> {
-            String userInput = wordTextView.getText().toString().trim();
+            String userInput = binding.editText.getText().toString().trim();
             String definitions = definitionsResult;
 
             vocabulary = new Vocabulary(userInput,definitions);
-            saveWordToDatabase(vocabulary);
+            //db.vDAO().insertTerm(vocabulary);
+            // Check if the entry already exists in the database
+            Executor executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                Vocabulary existingVocabulary = db.vDAO().findTermByInput(userInput);
+                if (existingVocabulary == null ) {
+                    // Entry does not exist, so insert the new vocabulary
+                    db.vDAO().insertTerm(vocabulary);
+                    // Optionally, display a message indicating successful insertion
+                    runOnUiThread(() -> {
+                        Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_successful), Toast.LENGTH_SHORT).show();
+                    });
+                } else {
+                    // Entry already exists, so display a message indicating duplication
+                    runOnUiThread(() -> {
+                        Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_unsuccessful), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
     }
 
@@ -173,18 +195,7 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    // Method to save word to local database
-    private void saveWordToDatabase(Vocabulary vocabulary) {
-        try {
-            VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
-                    "database-name").build();
 
-        vDao = db.vDAO();
-        vDao.insertTerm(vocabulary);
-        db.close();
-        } catch(Exception e){
-            e.printStackTrace();}
-    }
     @Override
     protected void onStop() {
         super.onStop();

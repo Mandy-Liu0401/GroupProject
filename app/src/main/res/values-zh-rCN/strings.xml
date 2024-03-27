@@ -23,4 +23,6 @@
     <string name="dialog_button_yes">是</string>
     <string name="snackbar_message">你已删除单词：</string>
     <string name="undo_button">撤回</string>
+    <string name="save_successful">已成功保存。</string>
+    <string name="save_unsuccessful">该单词已存在。</string>
 </resources>
