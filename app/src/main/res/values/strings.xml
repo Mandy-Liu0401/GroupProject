@@ -17,8 +17,6 @@
     <string name="error_message">No result found, please try another word.</string>
     <string name="API_name">Dictionary API</string>
     <string name="instruction_title">Instrcution for DIctionary API</string>
-    <string name="instruction_body" translatable="false">12121212121</string>
-    <string name="dialog_button_ok">DIsmiss</string>
     <string name="instruction_body">"1, Under \"New Serach\" tab, please enter a word to strat translating. If no result shown, Please enter a new word.\n\n2, You can press SAVE button to save a term to your own vocabulary for future review.\n\n3, You can manage your vocaburary under Vocabulary tab, and delete any term or all terms  you donnot need anymoew.\n "</string>
     <string name="dialog_button_ok">Dismiss</string>
     <string name="question_title">Question:</string>
