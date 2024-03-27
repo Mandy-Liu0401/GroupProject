@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Sunrise & Sunset -->
+    <color name="titleTextColor">#FFFFFFFF</color>
+
 </resources>

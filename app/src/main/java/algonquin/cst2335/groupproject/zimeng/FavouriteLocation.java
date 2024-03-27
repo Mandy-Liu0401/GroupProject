@@ -1,3 +1,10 @@
+/**
+ * Author: Zimeng Wang, 041095956
+ * Date: Mar 26, 2024
+ * Lab Section: CST2335 - 021
+ * Purpose:
+ */
+
 package algonquin.cst2335.groupproject.zimeng;
 
 import androidx.room.ColumnInfo;
@@ -15,14 +22,11 @@ public class FavouriteLocation {
   @ColumnInfo(name = "longitude")
   public double longitude;
 
-
-  // 构造函数
   public FavouriteLocation(double latitude, double longitude) {
     this.latitude = latitude;
     this.longitude = longitude;
   }
 
-  // Getters
   public int getId() {
     return id;
   }
@@ -33,7 +37,6 @@ public class FavouriteLocation {
     return longitude;
   }
 
-  // Setters
   public void setId(int id) {
     this.id = id;
   }

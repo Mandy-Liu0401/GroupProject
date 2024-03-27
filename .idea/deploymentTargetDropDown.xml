@@ -2,10 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Activity_DictionaryAPI">
+      <entry key="SunHomeTest">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="testAddToFavourite()">
+        <State />
+      </entry>
+      <entry key="testDeleteFavouriteLocation()">
+        <State />
+      </entry>
+      <entry key="testDisplayFavouriteList()">
+        <State />
+      </entry>
+      <entry key="testSharedPreferences()">
         <State />
       </entry>
     </value>

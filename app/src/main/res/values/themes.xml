@@ -3,7 +3,15 @@
     <style name="Base.Theme.GroupProject" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
     <style name="Theme.GroupProject" parent="Base.Theme.GroupProject" />
+
+    <!-- Sunrise & Sunset -->
+    <style name="Theme.Sun" parent="Base.Theme.GroupProject">
+        <item name="titleTextColor">@color/titleTextColor</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
 </resources>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Dictinary -->
     <string name="app_name">小组作业</string>
     <string name="button1">日出日落查询入口</string>
     <string name="button2">菜单查询入口</string>
@@ -25,4 +27,51 @@
     <string name="undo_button">撤回</string>
     <string name="save_successful">已成功保存。</string>
     <string name="save_unsuccessful">该单词已存在。</string>
+
+
+    <!-- Sunrise & Sunset -->
+    <string name="sunhome_toast_enter_lat_long">请输入经纬度</string>
+    <string name="sunhome_toast_location_added">已加收藏</string>
+    <string name="sunhome_toast_error_adding_location">已加收藏</string>
+    <string name="sunhome_toast_lookup_location_first">请先查询地理信息</string>
+    <string name="sunhome_toast_error_occured">错误</string>
+    <string name="sunhome_input_time_format">hh:mm:ss a</string>
+    <string name="sunhome_output_time_format">hh:mm:ss a</string>
+    <string name="sunhome_toast_error_fetching_data">获取数据错误</string>
+    <string name="sunhome_date_format">yyyy-MM-dd</string>
+    <string name="sunhome_menutitle">追光</string>
+    <string name="sunfav_delete">删除收藏位置</string>
+    <string name="sunfav_deleteconfirmation">确定删除吗？</string>
+    <string name="sunfav_deleteyes">是</string>
+    <string name="sunfav_deleteno">否</string>
+    <string name="sunfav_deleteundo">撤销</string>
+    <string name="sunfav_deleted">已删除</string>
+    <string name="sunfav_latformat">经度: %1$f</string>
+    <string name="sunfav_lngformat">纬度: %1$f</string>
+    <string name="sunmenu_about">关于</string>
+    <string name="sunmenu_message_ok_button">知道了</string>
+    <string name="sunhome_latitude_label">经度：</string>
+    <string name="sunhome_longitude_label">纬度：</string>
+    <string name="sunhome_add">添加</string>
+    <string name="sunhome_search_hint_lat">"  经度"</string>
+    <string name="sunhome_search_hint_lng">"  纬度"</string>
+    <string name="sunhome_search">搜索</string>
+    <string name="sunhome_favourites">收藏</string>
+    <string name="sunhome_sunrise_label">日出</string>
+    <string name="sunhome_sunset_label">日落</string>
+    <string name="sunhome_sunrise_time">日出时间</string>
+    <string name="sunhome_sunset_time">日落时间</string>
+    <string name="sunhome_latitude">经度</string>
+    <string name="sunhome_longitude">日落</string>
+    <string name="sunfav_goback">返回</string>
+    <string name="sunmenu_about_message">
+    界面使用说明\n\n
+    1. 输入所需位置的纬度和经度。\n\n
+    2. 点击搜索按钮以检索日出和日落时间。\n\n
+    3. 点击添加按钮将位置保存到您的收藏夹。\n\n
+    4. 使用菜单选项在屏幕之间导航。\n
+    </string>
+
+
+
 </resources>
