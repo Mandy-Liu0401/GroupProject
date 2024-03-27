@@ -11,10 +11,15 @@
     <string name="second">Saved Vocabulary</string>
     <string name="third">Help</string>
 
-<!-- wenxinAPI Section   -->
+    <!-- wenxinAPI Section   -->
     <string name="recipe_hint">Enter the name of recipe</string>
     <string name="search_recipe_button">Search</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="recipe_ID">Recipe ID</string>
+    <string name="recipe_summary">Recipe Summary</string>
+    <string name="recipe_source_URL">Recipe URL</string>
+    <string name="recipe_save">Save</string>
+    <string name="recipe_remove">Remove</string>
+    <string name="saved_list">Saved Recipes List </string>
 
 </resources>

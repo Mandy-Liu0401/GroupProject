@@ -13,20 +13,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject"
         tools:targetApi="31">
+
+        <activity
+            android:name=".wenxinAPI.RecipesActivity"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".wenxinAPI.SearchRecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".wenxinAPI.DetailedRecipeActivity"
-            android:exported="false" />
+            android:exported="true">
+            <!-- 如果这个 Activity 需要从其他应用接受 Intent，可以在这里添加相应的 intent-filter -->
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

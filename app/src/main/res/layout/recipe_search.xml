@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_width="99dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+
+
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="29dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -19,22 +22,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/recipe_ID"
+        android:layout_marginStart="92dp"
 
 
-        app:layout_constraintBottom_toTopOf="@id/recipeTitle"
         android:layout_marginBottom="16dp"
+        android:text="@string/recipe_ID"
+        app:layout_constraintBottom_toTopOf="@id/recipeTitle"
 
-        tools:layout_editor_absoluteX="199dp" />
+        app:layout_constraintStart_toEndOf="@id/recipeImage" />
 
     <TextView
         android:id="@+id/recipeTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/recipe_title"
-        tools:layout_editor_absoluteX="199dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="@id/recipeImage"
-        tools:layout_editor_absoluteY="137dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/recipeID" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

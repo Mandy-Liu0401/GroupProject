@@ -11,8 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import algonquin.cst2335.groupproject.databinding.ActivityMainBinding;
-import algonquin.cst2335.groupproject.mengyingAPI.DictionaryAPI;
+//import algonquin.cst2335.groupproject.mengyingAPI.DictionaryAPI;
+import algonquin.cst2335.groupproject.wenxinAPI.RecipesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,22 +37,21 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.item_1) {
+            return false;
 
-        }
-
-        else if (id == R.id.item_2) {
-
-        }
-
-        else if (id == R.id.item_3) {
-
-            Intent intent = new Intent(this, DictionaryAPI.class);
-            startActivity(intent);
+        } else if (id == R.id.item_2) {
+            Intent intent2 = new Intent(this, RecipesActivity.class);
+            startActivity(intent2);
             return true;
-        }
 
-        else if (id == R.id.item_4) {
+        } else if (id == R.id.item_3) {
 
+//            Intent intent = new Intent(this, DictionaryAPI.class);
+//            startActivity(intent);
+//            return true;
+            return false;
+        } else if (id == R.id.item_4) {
+            return false;
         }
         return super.onOptionsItemSelected(item);
     }
