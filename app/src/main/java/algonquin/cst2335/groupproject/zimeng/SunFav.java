@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -113,13 +115,21 @@ public class SunFav extends AppCompatActivity {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
       FavouriteLocation location = locations.get(position);
-      holder.latitudeTextView.setText(String.format("Latitude: %s", location.getLatitude()));
-      holder.longitudeTextView.setText(String.format("Longitude: %s", location.getLongitude()));
+      holder.latitudeTextView.setText(String.format("Lat: %s", location.getLatitude()));
+      holder.longitudeTextView.setText(String.format("Lng: %s", location.getLongitude()));
       holder.deleteButton.setOnClickListener(v -> deleteFavouriteLocation(location));
       holder.searchButton.setOnClickListener(v -> {
         Intent intent = new Intent(SunFav.this, SunHome.class);
         intent.putExtra("latitude", location.getLatitude());
         intent.putExtra("longitude", location.getLongitude());
+
+        // Save the selected latitude and longitude to SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("SunHome", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("searchLatitude", Double.toString(location.getLatitude()));
+        editor.putString("searchLongitude", Double.toString(location.getLongitude()));
+        editor.apply();
+
         startActivity(intent);
       });
     }

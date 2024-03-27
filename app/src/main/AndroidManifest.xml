@@ -12,15 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject"
         tools:targetApi="31" >
-        <activity
-            android:name=".zimeng.SunMenuHandler"
-            android:exported="false" />
-        <activity
-            android:name=".zimeng.SunHome"
-            android:exported="false" />
-        <activity
-            android:name=".zimeng.SunFav"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" >
@@ -33,7 +25,23 @@
 
       <activity android:name=".mengyingAPI.Activity_DictionaryAPI">
         </activity>
-      
+
+      <!-- Zimeng -->
+      <activity
+        android:name=".zimeng.SunMenuHandler"
+        android:exported="false" />
+      <activity
+        android:name=".zimeng.SunHome"
+        android:label="@string/sunhome_menutitle"
+        android:exported="false"
+        android:theme="@style/Theme.Sun"
+        />
+      <activity
+        android:name=".zimeng.SunFav"
+        android:label="@string/sunhome_menutitle"
+        android:exported="false"
+        android:theme="@style/Theme.Sun"
+        />
       <meta-data
         android:name="preloaded_fonts"
         android:resource="@array/preloaded_fonts" />

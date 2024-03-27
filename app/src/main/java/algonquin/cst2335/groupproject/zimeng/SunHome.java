@@ -57,6 +57,8 @@ public class SunHome extends AppCompatActivity {
     // Initialize SharedPreferences
     sharedPreferences = getSharedPreferences("SunHome", Context.MODE_PRIVATE);
 
+    Log.d("SunHome", "All SharedPreferences data: " + sharedPreferences.getAll());
+
     // Retrieve saved latitude, longitude, sunrise, and sunset times
     String savedLatitude = sharedPreferences.getString("latitude", "");
     String savedLongitude = sharedPreferences.getString("longitude", "");
@@ -66,6 +68,14 @@ public class SunHome extends AppCompatActivity {
     String savedSearchLatitude = sharedPreferences.getString("searchLatitude", "");
     String savedSearchLongitude = sharedPreferences.getString("searchLongitude", "");
 
+    Log.d("SunHome", "Retrieved from SharedPreferences:");
+    Log.d("SunHome", "latitude: " + savedLatitude);
+    Log.d("SunHome", "longitude: " + savedLongitude);
+    Log.d("SunHome", "sunrise: " + savedSunrise);
+    Log.d("SunHome", "sunset: " + savedSunset);
+    Log.d("SunHome", "searchLatitude: " + savedSearchLatitude);
+    Log.d("SunHome", "searchLongitude: " + savedSearchLongitude);
+
     // Set the retrieved values to the TextView fields
     binding.latitude.setText(savedLatitude);
     binding.longtitude.setText(savedLongitude);
@@ -73,6 +83,14 @@ public class SunHome extends AppCompatActivity {
     binding.sunsetTime.setText(savedSunset);
     binding.inputLat.setText(savedSearchLatitude);
     binding.inputLong.setText(savedSearchLongitude);
+
+    // If saved latitude and longitude are not empty, do the sunrise/sunset query
+    if (!savedLatitude.isEmpty() && !savedLongitude.isEmpty()) {
+      double latitude = Double.parseDouble(savedLatitude);
+      double longitude = Double.parseDouble(savedLongitude);
+      doSunriseSunsetQuery(latitude, longitude);
+    }
+
 
     // Initialize the database
     db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "favourite-locations-db").allowMainThreadQueries().build();
@@ -109,18 +127,21 @@ public class SunHome extends AppCompatActivity {
       }
     });
 
-    binding.btnSunhomeFav.setOnClickListener(v -> {
-      Intent intent = new Intent(SunHome.this, SunFav.class);
-      startActivity(intent);
+    binding.btnSunhomeFav.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(SunHome.this, SunFav.class);
+        startActivity(intent);
+      }
     });
 
     Intent intent = getIntent();
     if (intent.hasExtra("latitude") && intent.hasExtra("longitude")) {
       double latitude = intent.getDoubleExtra("latitude", 0);
       double longitude = intent.getDoubleExtra("longitude", 0);
-      binding.latitude.setText(String.valueOf(latitude));
-      binding.longtitude.setText(String.valueOf(longitude));
-      doSunriseSunsetQuery(latitude, longitude);
+      binding.inputLat.setText(String.valueOf(latitude));
+      binding.inputLong.setText(String.valueOf(longitude));
+      lookupSunriseSunset(String.valueOf(latitude), String.valueOf(longitude));
     }
 
 
@@ -129,9 +150,9 @@ public class SunHome extends AppCompatActivity {
   @Override
   protected void onPause() {
     super.onPause();
-
     // Save the current latitude, longitude, sunrise, and sunset times
     SharedPreferences.Editor editor = sharedPreferences.edit();
+
     editor.putString("latitude", binding.latitude.getText().toString());
     editor.putString("longitude", binding.longtitude.getText().toString());
     editor.putString("sunrise", binding.sunriseTime.getText().toString());
@@ -139,6 +160,17 @@ public class SunHome extends AppCompatActivity {
     editor.putString("searchLatitude", binding.inputLat.getText().toString());
     editor.putString("searchLongitude", binding.inputLong.getText().toString());
     editor.apply();
+
+    Log.d("SunHome", "Saved to SharedPreferences:");
+    Log.d("SunHome", "latitude: " + binding.latitude.getText().toString());
+    Log.d("SunHome", "longitude: " + binding.longtitude.getText().toString());
+    Log.d("SunHome", "sunrise: " + binding.sunriseTime.getText().toString());
+    Log.d("SunHome", "sunset: " + binding.sunsetTime.getText().toString());
+    Log.d("SunHome", "searchLatitude: " + binding.inputLat.getText().toString());
+    Log.d("SunHome", "searchLongitude: " + binding.inputLong.getText().toString());
+
+    Log.d("SunHome", "All SharedPreferences data: " + sharedPreferences.getAll());
+
   }
 
   @Override
@@ -178,6 +210,8 @@ public class SunHome extends AppCompatActivity {
 
             // Save the retrieved sunrise and sunset times
             SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("latitude", latitude);
+            editor.putString("longitude", longitude);
             editor.putString("sunrise", sunrise);
             editor.putString("sunset", sunset);
             editor.apply();
