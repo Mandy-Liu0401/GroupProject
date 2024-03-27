@@ -17,7 +17,17 @@
     <string name="error_message">查询不到结果，请查询新词</string>
     <string name="API_name">字典</string>
     <string name="instruction_title">用户手册</string>
+    <string name="instruction_body">1， 在“新的查询”菜单下， 请输入需要查询的单词， 如果没有结果返回， 请输入新单词。 2，你可以点击“保存”按钮以添加单词到你的单词簿。 3，在“单词簿”下， 你可以浏览保存的单词，并点击单个单词来删除，或者点击“清空单词簿”来删除整个单词簿。</string>
     <string name="dialog_button_ok">已阅并关闭</string>
+    <string name="question_title">提问：</string>
+    <string name="question_body">是否要删除单词：</string>
+    <string name="dialog_button_no">否</string>
+    <string name="dialog_button_yes">是</string>
+    <string name="snackbar_message">你已删除单词：</string>
+    <string name="undo_button">撤回</string>
+    <string name="save_successful">已成功保存。</string>
+    <string name="save_unsuccessful">该单词已存在。</string>
+
 
     <!-- Sunrise & Sunset -->
     <string name="sunhome_toast_enter_lat_long">请输入经纬度</string>
@@ -61,6 +71,7 @@
     3. 点击添加按钮将位置保存到您的收藏夹。\n\n
     4. 使用菜单选项在屏幕之间导航。\n
     </string>
+
 
 
 </resources>

@@ -6,16 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
+import kotlinx.coroutines.*;
+import java.lang.Exception;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +29,8 @@ import algonquin.cst2335.groupproject.R;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Activity_DictionaryAPI extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -33,6 +38,8 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
     private static final String URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
     private TextView wordTextView;
     private TextView definitionTextView;
+
+    private String definitionsResult;
     private RequestQueue queue;
 
     // Define a key for the SharedPreferences
@@ -42,8 +49,7 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
     private RecyclerView.Adapter myAdapter;
     private VocabularyDAO vDao;
     ActivityDictionaryApiBinding binding ;
-    ArrayList<Vocabulary> terms;
-    DictionaryAPIViewModel dictionaryModel;
+    Vocabulary vocabulary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,7 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
 
+        //set up translate button listener
         binding.translateButton.setOnClickListener(v -> {
             // Get the text from EditText
             String userInput = binding.editText.getText().toString().trim();
@@ -102,7 +109,35 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             fetchDictionary(my_url);
         });
 
-        String savedUserInput = prefs.getString("LoginName", "");
+        VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
+                "vocabulary_db").allowMainThreadQueries().build();
+
+        // Set up save_button click listener
+        binding.saveButton.setOnClickListener(click-> {
+            String userInput = binding.editText.getText().toString().trim();
+            String definitions = definitionsResult;
+
+            vocabulary = new Vocabulary(userInput,definitions);
+            //db.vDAO().insertTerm(vocabulary);
+            // Check if the entry already exists in the database
+            Executor executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                Vocabulary existingVocabulary = db.vDAO().findTermByInput(userInput);
+                if (existingVocabulary == null ) {
+                    // Entry does not exist, so insert the new vocabulary
+                    db.vDAO().insertTerm(vocabulary);
+                    // Optionally, display a message indicating successful insertion
+                    runOnUiThread(() -> {
+                        Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_successful), Toast.LENGTH_SHORT).show();
+                    });
+                } else {
+                    // Entry already exists, so display a message indicating duplication
+                    runOnUiThread(() -> {
+                        Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_unsuccessful), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
+        });
     }
 
     private void fetchDictionary(String url) {
@@ -139,16 +174,17 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     wordTextView.setText(word);
-                    definitionTextView.setText(definitionsBuilder.toString());
+                    definitionsResult = definitionsBuilder.toString();
+                    definitionTextView.setText(definitionsResult);
+
                 });
             } catch (JSONException e) {
                 e.printStackTrace();
-                Snackbar.make(findViewById(android.R.id.content), R.string.error_message, Snackbar.LENGTH_LONG).show();
-                wordTextView.setText("");
-                definitionTextView.setText("");
             }
         },
-        error -> {Snackbar.make(findViewById(android.R.id.content), R.string.error_message, Snackbar.LENGTH_LONG).show();
+        error -> {
+            //show a toast warning if no search result
+            Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.error_message), Toast.LENGTH_LONG).show();
             wordTextView.setText("");
             definitionTextView.setText("");}
         );
@@ -158,6 +194,8 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -172,9 +210,9 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(getString(R.string.instruction_title))
-                .setMessage(getString(R.string.instruction_body))
-                .setNegativeButton(getString(R.string.dialog_button_ok), (dialog, which) -> {
-                    dialog.dismiss();
-                }).show();
+            .setMessage(getString(R.string.instruction_body))
+            .setNegativeButton(getString(R.string.dialog_button_ok), (dialog, which) -> {
+                dialog.dismiss();
+            }).show();
     }
 }

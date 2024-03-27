@@ -13,12 +13,22 @@
     <string name="home">New Search</string>
     <string name="second">Saved Vocabulary</string>
     <string name="third">Help</string>
-    <string name="save_button">Save to my Vocabulary</string>
+    <string name="save_button">Save</string>
     <string name="error_message">No result found, please try another word.</string>
     <string name="API_name">Dictionary API</string>
     <string name="instruction_title">Instrcution for DIctionary API</string>
     <string name="instruction_body" translatable="false">12121212121</string>
     <string name="dialog_button_ok">DIsmiss</string>
+    <string name="instruction_body">"1, Under \"New Serach\" tab, please enter a word to strat translating. If no result shown, Please enter a new word.\n\n2, You can press SAVE button to save a term to your own vocabulary for future review.\n\n3, You can manage your vocaburary under Vocabulary tab, and delete any term or all terms  you donnot need anymoew.\n "</string>
+    <string name="dialog_button_ok">Dismiss</string>
+    <string name="question_title">Question:</string>
+    <string name="question_body">Do you want to delete the :</string>
+    <string name="dialog_button_no">No</string>
+    <string name="dialog_button_yes">Yes</string>
+    <string name="snackbar_message">You deleted term: </string>
+    <string name="undo_button">UNDO</string>
+    <string name="save_successful">Vocabulary saved successfully.</string>
+    <string name="save_unsuccessful">Vocabulary already exists.</string>
 
 
     <!-- Sunrise & Sunset -->
@@ -70,6 +80,5 @@
     <string name="sunfav_goback">Go Back</string>
     <!-- SunHomeTese.java-->
     <string name="suntest_date" translatable="false">2024-06-08</string>
-
 
 </resources>
