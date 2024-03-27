@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: Zimeng Wang, Student ID: 041095956
+    Date: March 26, 2024
+    Lab Section: CST2335 - 021
+    Purpose: This layout is used for the SunFav activity, which lists all favorite locations saved by
+    the user.
+-->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"

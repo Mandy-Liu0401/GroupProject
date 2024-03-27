@@ -23,10 +23,11 @@
             </intent-filter>
         </activity>
 
+
       <activity android:name=".mengyingAPI.Activity_DictionaryAPI">
         </activity>
 
-      <!-- Zimeng -->
+      <!-- Sunrise & Sunset -->
       <activity
         android:name=".zimeng.SunMenuHandler"
         android:exported="false" />

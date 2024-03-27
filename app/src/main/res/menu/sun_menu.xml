@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: Zimeng Wang
+    Date: March 26, 2024
+    Lab Section: CST2335 - 021
+    Purpose: This layout is designed for the SunHome activity in the Android application.
+-->
+
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android">
 

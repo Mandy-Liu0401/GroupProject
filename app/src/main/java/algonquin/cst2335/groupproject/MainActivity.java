@@ -3,13 +3,10 @@ package algonquin.cst2335.groupproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import algonquin.cst2335.groupproject.databinding.ActivityMainBinding;
 import algonquin.cst2335.groupproject.zimeng.SunHome;
 import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
 
@@ -36,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.item_1) {
-
             Intent intent = new Intent(MainActivity.this, SunHome.class);
             startActivity(intent);
         }
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.item_3) {
-
             Intent intent = new Intent(this, Activity_DictionaryAPI.class);
             startActivity(intent);
             return true;

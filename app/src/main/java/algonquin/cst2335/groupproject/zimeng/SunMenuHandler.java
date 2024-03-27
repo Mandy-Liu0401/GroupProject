@@ -1,7 +1,14 @@
+/**
+ * Author: Zimeng Wang, 041095956
+ * Date: Mar 26, 2024
+ * Lab Section: CST2335 - 021
+ * Purpose:
+ */
+
 package algonquin.cst2335.groupproject.zimeng;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,13 +45,9 @@ public class SunMenuHandler {
 
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("About");
-        builder.setMessage("Instructions for using the interface:\n\n" +
-            "1. Enter the latitude and longitude of the desired location.\n" +
-            "2. Click the Search button to retrieve the sunrise and sunset times.\n" +
-            "3. Click the Add button to save the location to your favourites.\n" +
-            "4. Use the menu options to navigate between screens.");
-        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.setTitle(R.string.sunmenu_about);
+        builder.setMessage(R.string.sunmenu_about_message);
+        builder.setPositiveButton(R.string.sunmenu_message_ok_button, (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 }

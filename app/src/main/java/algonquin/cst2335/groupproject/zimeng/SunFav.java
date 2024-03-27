@@ -1,3 +1,10 @@
+/**
+ * Author: Zimeng Wang, 041095956
+ * Date: Mar 26, 2024
+ * Lab Section: CST2335 - 021
+ * Purpose:
+ */
+
 package algonquin.cst2335.groupproject.zimeng;
 
 import androidx.appcompat.app.AlertDialog;
@@ -7,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,12 +26,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import algonquin.cst2335.groupproject.R;
 
 public class SunFav extends AppCompatActivity {
@@ -51,9 +54,7 @@ public class SunFav extends AppCompatActivity {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     viewModel = new ViewModelProvider(this).get(FavoriteLocationViewModel.class);
-    viewModel.getLocations().observe(this, locations -> {
-      adapter.setLocations(locations);
-    });
+    viewModel.getLocations().observe(this, locations -> adapter.setLocations(locations));
 
     db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "favourite-locations-db").allowMainThreadQueries().build();
 
@@ -65,7 +66,6 @@ public class SunFav extends AppCompatActivity {
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
       startActivity(intent);
     });
-
 
   }
 
@@ -86,19 +86,19 @@ public class SunFav extends AppCompatActivity {
 
   public void deleteFavouriteLocation(FavouriteLocation location) {
     new AlertDialog.Builder(this)
-        .setTitle("Delete Favourite Location")
-        .setMessage("Are you sure you want to delete this location?")
-        .setPositiveButton("Yes", (dialog, which) -> {
+        .setTitle(R.string.sunfav_delete)
+        .setMessage(R.string.sunfav_deleteconfirmation)
+        .setPositiveButton(R.string.sunfav_deleteyes, (dialog, which) -> {
           db.favouriteLocationDao().delete(location);
           loadFavouriteLocations();
-          Snackbar.make(recyclerView, "Location deleted", Snackbar.LENGTH_LONG)
-              .setAction("Undo", v -> {
+          Snackbar.make(recyclerView, R.string.sunfav_deleted, Snackbar.LENGTH_LONG)
+              .setAction(R.string.sunfav_deleteundo, v -> {
                 db.favouriteLocationDao().insert(location);
                 loadFavouriteLocations();
               })
               .show();
         })
-        .setNegativeButton("No", null)
+        .setNegativeButton(R.string.sunfav_deleteno, null)
         .show();
   }
 
@@ -115,8 +115,8 @@ public class SunFav extends AppCompatActivity {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
       FavouriteLocation location = locations.get(position);
-      holder.latitudeTextView.setText(String.format("Lat: %s", location.getLatitude()));
-      holder.longitudeTextView.setText(String.format("Lng: %s", location.getLongitude()));
+      holder.latitudeTextView.setText(String.format(getString(R.string.sunfav_latformat), location.getLatitude()));
+      holder.longitudeTextView.setText(String.format(getString(R.string.sunfav_lngformat), location.getLongitude()));
       holder.deleteButton.setOnClickListener(v -> deleteFavouriteLocation(location));
       holder.searchButton.setOnClickListener(v -> {
         Intent intent = new Intent(SunFav.this, SunHome.class);

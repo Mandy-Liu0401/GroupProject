@@ -1,3 +1,10 @@
+/**
+ * Author: Zimeng Wang, 041095956
+ * Date: Mar 26, 2024
+ * Lab Section: CST2335 - 021
+ * Purpose:
+ */
+
 package algonquin.cst2335.groupproject.zimeng;
 
 import android.content.Context;
@@ -11,23 +18,17 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.SunHomeBinding;
 
@@ -50,15 +51,12 @@ public class SunHome extends AppCompatActivity {
     setSupportActionBar(toolbar);
 
     // Set today's date
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.sunhome_date_format), Locale.getDefault());
     String currentDate = dateFormat.format(new Date());
-    binding.date.setText(currentDate);
+    binding.sunhomeDate.setText(currentDate);
 
     // Initialize SharedPreferences
     sharedPreferences = getSharedPreferences("SunHome", Context.MODE_PRIVATE);
-
-    Log.d("SunHome", "All SharedPreferences data: " + sharedPreferences.getAll());
-
     // Retrieve saved latitude, longitude, sunrise, and sunset times
     String savedLatitude = sharedPreferences.getString("latitude", "");
     String savedLongitude = sharedPreferences.getString("longitude", "");
@@ -67,14 +65,6 @@ public class SunHome extends AppCompatActivity {
     // Retrieve saved EditText content
     String savedSearchLatitude = sharedPreferences.getString("searchLatitude", "");
     String savedSearchLongitude = sharedPreferences.getString("searchLongitude", "");
-
-    Log.d("SunHome", "Retrieved from SharedPreferences:");
-    Log.d("SunHome", "latitude: " + savedLatitude);
-    Log.d("SunHome", "longitude: " + savedLongitude);
-    Log.d("SunHome", "sunrise: " + savedSunrise);
-    Log.d("SunHome", "sunset: " + savedSunset);
-    Log.d("SunHome", "searchLatitude: " + savedSearchLatitude);
-    Log.d("SunHome", "searchLongitude: " + savedSearchLongitude);
 
     // Set the retrieved values to the TextView fields
     binding.latitude.setText(savedLatitude);
@@ -102,11 +92,9 @@ public class SunHome extends AppCompatActivity {
       if (!latitude.isEmpty() && !longitude.isEmpty()) {
         lookupSunriseSunset(latitude, longitude);
       } else {
-        Toast.makeText(SunHome.this, "Please enter latitude and longitude", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SunHome.this, R.string.sunhome_toast_enter_lat_long, Toast.LENGTH_SHORT).show();
       }
     });
-
-
 
     binding.btnSunhomeAddfav.setOnClickListener(v -> {
       String latitude = binding.latitude.getText().toString();
@@ -115,24 +103,21 @@ public class SunHome extends AppCompatActivity {
       if (!latitude.isEmpty() && !longitude.isEmpty()) {
         try {
           FavouriteLocation location = new FavouriteLocation(Double.parseDouble(latitude), Double.parseDouble(longitude));
-          location.setId(0); // 设置 id 为默认值，以便自动生成
+          location.setId(0);
           db.favouriteLocationDao().insert(location);
-          Toast.makeText(SunHome.this, "Location added to favourites", Toast.LENGTH_SHORT).show();
+          Toast.makeText(SunHome.this, R.string.sunhome_toast_location_added, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-          Log.e("SunHome", "Error adding location to favourites", e);
-          Toast.makeText(SunHome.this, "Error adding location to favourites: " + e.getMessage(), Toast.LENGTH_LONG).show();
+          Log.e("SunHome", getString(R.string.sunhome_toast_error_adding_location), e);
+          Toast.makeText(SunHome.this, R.string.sunhome_toast_error_adding_location + e.getMessage(), Toast.LENGTH_LONG).show();
         }
       } else {
-        Toast.makeText(SunHome.this, "Please lookup a location first", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SunHome.this, R.string.sunhome_toast_lookup_location_first, Toast.LENGTH_SHORT).show();
       }
     });
 
-    binding.btnSunhomeFav.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(SunHome.this, SunFav.class);
-        startActivity(intent);
-      }
+    binding.btnSunhomeFav.setOnClickListener(v -> {
+      Intent intent = new Intent(SunHome.this, SunFav.class);
+      startActivity(intent);
     });
 
     Intent intent = getIntent();
@@ -144,7 +129,6 @@ public class SunHome extends AppCompatActivity {
       lookupSunriseSunset(String.valueOf(latitude), String.valueOf(longitude));
     }
 
-
   }
 
   @Override
@@ -152,7 +136,6 @@ public class SunHome extends AppCompatActivity {
     super.onPause();
     // Save the current latitude, longitude, sunrise, and sunset times
     SharedPreferences.Editor editor = sharedPreferences.edit();
-
     editor.putString("latitude", binding.latitude.getText().toString());
     editor.putString("longitude", binding.longtitude.getText().toString());
     editor.putString("sunrise", binding.sunriseTime.getText().toString());
@@ -160,17 +143,6 @@ public class SunHome extends AppCompatActivity {
     editor.putString("searchLatitude", binding.inputLat.getText().toString());
     editor.putString("searchLongitude", binding.inputLong.getText().toString());
     editor.apply();
-
-    Log.d("SunHome", "Saved to SharedPreferences:");
-    Log.d("SunHome", "latitude: " + binding.latitude.getText().toString());
-    Log.d("SunHome", "longitude: " + binding.longtitude.getText().toString());
-    Log.d("SunHome", "sunrise: " + binding.sunriseTime.getText().toString());
-    Log.d("SunHome", "sunset: " + binding.sunsetTime.getText().toString());
-    Log.d("SunHome", "searchLatitude: " + binding.inputLat.getText().toString());
-    Log.d("SunHome", "searchLongitude: " + binding.inputLong.getText().toString());
-
-    Log.d("SunHome", "All SharedPreferences data: " + sharedPreferences.getAll());
-
   }
 
   @Override
@@ -187,18 +159,16 @@ public class SunHome extends AppCompatActivity {
     double lat = Double.parseDouble(latitude);
     double lng = Double.parseDouble(longitude);
     String url = "https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lng + "&date=today";
-    Log.d("SunHome", "API URL: " + url);
 
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
         response -> {
-          Log.d("SunHome", "API Response: " + response.toString());
           try {
             JSONObject results = response.getJSONObject("results");
             String sunriseUtc = results.getString("sunrise");
             String sunsetUtc = results.getString("sunset");
 
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm:ss a", Locale.US);
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm:ss a", Locale.US);
+            SimpleDateFormat inputFormat = new SimpleDateFormat(getString(R.string.sunhome_input_time_format), Locale.US);
+            SimpleDateFormat outputFormat = new SimpleDateFormat(getString(R.string.sunhome_output_time_format), Locale.US);
             inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
             Date sunriseDate = inputFormat.parse(sunriseUtc);
@@ -227,14 +197,12 @@ public class SunHome extends AppCompatActivity {
           }
         },
         error -> {
-          Log.e("SunHome", "API Error: " + error.getMessage());
-          Toast.makeText(SunHome.this, "Error occurred: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+          Toast.makeText(SunHome.this, R.string.sunhome_toast_error_occured + error.getMessage(), Toast.LENGTH_SHORT).show();
         });
 
     RequestQueue requestQueue = Volley.newRequestQueue(this);
     requestQueue.add(jsonObjectRequest);
   }
-
 
   private void doSunriseSunsetQuery(double latitude, double longitude) {
     String url = "https://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=today";
@@ -246,8 +214,8 @@ public class SunHome extends AppCompatActivity {
             String sunriseUtc = results.getString("sunrise");
             String sunsetUtc = results.getString("sunset");
 
-            SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm:ss a", Locale.US);
-            SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm:ss a", Locale.US);
+            SimpleDateFormat inputFormat = new SimpleDateFormat(getString(R.string.sunhome_input_time_format), Locale.US);
+            SimpleDateFormat outputFormat = new SimpleDateFormat(getString(R.string.sunhome_output_time_format), Locale.US);
             inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
             Date sunriseDate = inputFormat.parse(sunriseUtc);
@@ -257,7 +225,6 @@ public class SunHome extends AppCompatActivity {
             String sunrise = outputFormat.format(sunriseDate);
             String sunset = outputFormat.format(sunsetDate);
 
-            // 更新 UI 以显示最新的查询结果
             binding.sunriseTime.setText(sunrise);
             binding.sunsetTime.setText(sunset);
 
@@ -265,11 +232,9 @@ public class SunHome extends AppCompatActivity {
             e.printStackTrace();
           }
         }, error -> {
-          // 处理查询错误
-          Toast.makeText(SunHome.this, "Error occurred while fetching data", Toast.LENGTH_SHORT).show();
+          Toast.makeText(SunHome.this, R.string.sunhome_toast_error_fetching_data, Toast.LENGTH_SHORT).show();
         });
 
-    // 将请求添加到请求队列
     Volley.newRequestQueue(this).add(jsonObjectRequest);
   }
 
