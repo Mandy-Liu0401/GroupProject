@@ -40,6 +40,7 @@
     <string name="sunhome_output_time_format">hh:mm:ss a</string>
     <string name="sunhome_toast_error_fetching_data">Error occurred while fetching data</string>
     <string name="sunhome_date_format">yyyy-MM-dd</string>
+    <string name="sunhome_date" translatable="false">2024-04-01</string>
     <!-- SunFav.java -->
     <string name="sunhome_menutitle">SunCycle</string>
     <string name="sunfav_delete">Delete Favourite Location</string>
@@ -76,7 +77,10 @@
     <string name="sunhome_longitude">sunset time</string>
     <!-- Sun_Fav.xml-->
     <string name="sunfav_goback">Go Back</string>
-    <!-- SunHomeTese.java-->
+    <!-- Sun_menu.xml-->
+    <string name="sunmenu_icon_home">Home</string>
+    <string name="sunmenu_icon_about">About</string>
+    <!-- SunHomeTest.java-->
     <string name="suntest_date" translatable="false">2024-06-08</string>
 
 </resources>
