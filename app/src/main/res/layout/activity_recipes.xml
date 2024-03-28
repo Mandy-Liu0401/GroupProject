@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wenxinAPI.RecipesActivity">
+    tools:context=".wenxinAPI.RecipesActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-24dp">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -12,7 +14,7 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="160dp"
         android:background="?attr/colorPrimary"
@@ -26,8 +28,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecipeRecycleView"
-        android:layout_width="417dp"
-        android:layout_height="394dp"
+        android:layout_width="411dp"
+        android:layout_height="292dp"
 
         app:layout_constraintBottom_toTopOf="@id/enterRecipe"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
         android:hint="@string/recipe_hint"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,62 +64,59 @@
         app:layout_constraintBottom_toBottomOf="@id/enterRecipe"
         app:layout_constraintEnd_toEndOf="parent"
 
-
         app:layout_constraintStart_toEndOf="@id/enterRecipe" />
 
     <ImageView
         android:id="@+id/detailImage"
 
-        android:layout_width="104dp"
-        android:layout_height="87dp"
+        android:layout_width="74dp"
+        android:layout_height="69dp"
 
-        app:layout_constraintBottom_toTopOf="@id/enterRecipe"
-        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toEndOf="@id/inDeatilSuammry"
         app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView"
-
-
-        app:layout_constraintVertical_bias="0.208"
         app:srcCompat="@drawable/recipe" />
 
     <TextView
         android:id="@+id/inDeatilSuammry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-
-        android:text="TextView"
+        android:layout_width="297dp"
+        android:layout_height="135dp"
 
 
-        app:layout_constraintBottom_toBottomOf="@id/detailImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toEndOf="@id/detailImage"
-
+        android:layout_marginTop="4dp"
+        android:text="@string/recipe_summary"
         app:layout_constraintTop_toTopOf="@id/detailImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/inDetailSourceURL"
-        android:layout_width="176dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.165"
+        android:layout_width="299dp"
+        android:layout_height="48dp"
 
-        app:layout_constraintStart_toEndOf="@id/detailImage"
-        app:layout_constraintTop_toBottomOf="@id/inDeatilSuammry" />
+        android:layout_marginTop="4dp"
+        android:text="@string/recipe_source_URL"
+        android:textColor="@color/orange"
+        app:layout_constraintEnd_toStartOf="@id/recipeSaveButton"
+
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/recipeSaveButton"
+        app:layout_constraintTop_toBottomOf="@+id/inDeatilSuammry" />
 
     <Button
         android:id="@+id/recipeSaveButton"
-        android:layout_width="119dp"
+        android:layout_width="81dp"
         android:layout_height="38dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="296dp"
-        android:text="@string/recipe_save"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="8dp"
 
+        android:text="@string/recipe_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView" />
+        app:layout_constraintTop_toBottomOf="@+id/detailImage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

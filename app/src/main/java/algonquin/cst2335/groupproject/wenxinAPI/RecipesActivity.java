@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivityRecipesBinding;
 import algonquin.cst2335.groupproject.databinding.RecipeSearchBinding;
@@ -80,22 +81,20 @@ public class RecipesActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId()==R.id.recipe_saved_icon){
+        if (item.getItemId() == R.id.recipe_saved_icon) {
 //            Intent intent2 = new Intent(this, RecipesActivity.class);
 //            startActivity(intent2);
 //            return true;
-
-
-
-        }else{
-            if (item.getItemId() == R.id.item_2) {
-
+        } else if (item.getItemId() == R.id.home) {
+            Intent homeIntent = new Intent(this, MainActivity.class);
+            startActivity(homeIntent);
+            return true;
+        } else {
+            if (item.getItemId() == R.id.help) {
                 Toast.makeText(this, "This is Version 1.0, Author: Wenxin Li", Toast.LENGTH_LONG).show();
                 return true;
             }
-
         }
-
         return true;
     }
 
@@ -103,9 +102,7 @@ public class RecipesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.recipe_menu, menu);
-
         return true;
-
     }
 
 //    private void loadMessagesFromDatabase() {
@@ -118,7 +115,6 @@ public class RecipesActivity extends AppCompatActivity {
 
     private void initializeSendReceiveButtons() {
         binding.searchRecipeButton.setOnClickListener(v -> searchRecipe(true));
-
     }
 
 
@@ -139,10 +135,8 @@ public class RecipesActivity extends AppCompatActivity {
                     // failed toast
                     Toast.makeText(RecipesActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 });
-
         // add to queue
         requestQueue.add(jsonObjectRequest);
-
     }
 
     private void parseRecipesResponse(JSONObject response) {
@@ -164,21 +158,16 @@ public class RecipesActivity extends AppCompatActivity {
                 recipeViewModel.recipes.setValue(recipeList);
 
                 //ChatMessage recipe = new ChatMessage(title, summary,y);
-
 //                ArrayList<ChatMessage> update = new ArrayList<>(chatModel.messages.getValue());
 //                update.add(recipe);
 //                chatModel.messages.setValue(update);
-
                 // recipesResult.add(recipe);
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(RecipesActivity.this, "Error parsing recipes: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
 
     private void initializeRecyclerView() {
         myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
@@ -196,13 +185,11 @@ public class RecipesActivity extends AppCompatActivity {
                 Recipe recipe = recipeViewModel.recipes.getValue().get(position);
                 holder.recipeIDText.setText(Integer.toString(recipe.recipeID));
                 holder.recipeTitleText.setText(recipe.getTitle());
-
                 //image
                 String imageUrl = recipe.getImageURL() != null ? recipe.getImageURL() : "";
                 Glide.with(holder.itemView.getContext())
                         .load(!imageUrl.isEmpty() ? imageUrl : R.drawable.recipe)
                         .into(holder.recipeImageInput);
-
 
 //                ChatMessage message = chatModel.messages.getValue().get(position);
 //                holder.messageText.setText(message.getMessage());y
@@ -212,12 +199,8 @@ public class RecipesActivity extends AppCompatActivity {
             @Override
             public int getItemCount() {
                 return recipeViewModel.recipes.getValue() == null ? 0 : recipeViewModel.recipes.getValue().size();
-
             }
-
-
         };
-
         binding.RecipeRecycleView.setLayoutManager(new LinearLayoutManager(this));
         binding.RecipeRecycleView.setAdapter(myAdapter);
     }
@@ -233,13 +216,12 @@ public class RecipesActivity extends AppCompatActivity {
             recipeTitleText = itemView.findViewById(R.id.recipeTitle);
             recipeImageInput = itemView.findViewById(R.id.recipeImage);
 
-
             itemView.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
                 Recipe recipe = recipeViewModel.recipes.getValue().get(position);
                 int clickedID = recipe.recipeID;
 
-                fetchSecondQuery(clickedID);
+                fetchSecondQuery(recipe);
 
 
 //                AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
@@ -252,9 +234,9 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
-    public void fetchSecondQuery(int recipeID) {
+    public void fetchSecondQuery(Recipe recipe) {
         requestQueue = Volley.newRequestQueue(this);
-        int queryID = recipeID;
+        int queryID = recipe.getRecipeID();
 
         String url = "https://api.spoonacular.com/recipes/" + queryID + "/information?apiKey=" + "abb4102db3714c6eb68729fbb6ad77fd";
 
@@ -263,10 +245,12 @@ public class RecipesActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     // 请求成功，解析响应数据
-                    parseSecondRecipesResponse(response);
+                    Log.d("RecipesActivity", "请求成功: " + response.toString());
+                    parseSecondRecipesResponse(response, recipe);
                 },
                 error -> {
                     // 请求失败，处理错误
+                    Log.e("RecipesActivity", "请求失败: " + error.toString());
                     Toast.makeText(RecipesActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 });
 
@@ -276,33 +260,50 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
-    private void parseSecondRecipesResponse(JSONObject response) {
+    private void parseSecondRecipesResponse(JSONObject response, Recipe recipe) {
 
         try {
-            JSONArray recipesArray = response.getJSONArray("results");
-            for (int i = 0; i < recipesArray.length(); i++) {
-                JSONObject recipeObject = recipesArray.getJSONObject(i);
-
-                //we get all information this time
-                int recipeID = recipeObject.getInt("id");
-                String imageURL = recipeObject.getString("image");
-                String sourceURL = recipeObject.getString("sourceURL");
-                String title = recipeObject.getString("title");
-                String summary = recipeObject.optString("image", "");
-
-                Recipe recipe = new Recipe(title, imageURL, summary, sourceURL, recipeID);
-
-                showDetail(recipe);
+            Log.d("RecipesActivity", "开始解析响应数据");
 
 
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(RecipesActivity.this, "Error parsing recipes: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+            //we get all information this time
+//            JSONArray recipeDetailArray = new JSONArray(response);
+//            JSONObject recipeDetailObject = recipeDetailArray.getJSONObject(0);
+
+
+            String sourceURL = response.getString("sourceUrl");
+            String summary=response.getString("summary");
+
+
+            int recipeID = recipe.getRecipeID();
+            String imageURL = recipe.getImageURL();
+            String title =recipe.getTitle();
+
+            Log.d("RecipesActivity", "解析完成，存入recipe");
+            Recipe detailRecipe = new Recipe(title, imageURL, summary, sourceURL, recipeID);
+
+
+            //String imageUrl = response.optString("image");
+            //                    String summary = response.optString("summary");
+            //                    String sourceUrl = response.optString("sourceUrl");
+            //
+            //                    // 使用这些详情更新UI或展示给用户
+            //                    showRecipeDetails(imageUrl, summary, sourceUrl);
+            showDetail(detailRecipe);
+            Log.d("RecipesActivity", "parsing done  " + title);
+
+    } catch(
+    JSONException e)
+
+    {
+        e.printStackTrace();
+        Toast.makeText(RecipesActivity.this, "Error parsing recipes: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
 
+}
+
     public void showDetail(Recipe recipe) {
+        Log.d("RecipesActivity", "show detail recipe " + recipe.getTitle());
         binding.inDeatilSuammry.setText(recipe.getSummary());
         binding.inDetailSourceURL.setText(recipe.getSourceURL());
 
@@ -316,10 +317,19 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
-    public void saveRecipe(Recipe recipe) {
-        rDAO.insertRecipe(recipe);
-
-
+    public boolean saveRecipe(Recipe recipe) {
+        try {
+            Log.d("RecipesActivity", "click save recipe");
+            rDAO.insertRecipe(recipe);
+            Toast.makeText(RecipesActivity.this, "Recipe saved", Toast.LENGTH_LONG).show();
+            // 插入成功
+            return true;
+        } catch (Exception e) {
+            Log.d("RecipesActivity", "菜谱详情显示完毕");
+            Toast.makeText(RecipesActivity.this, "error saved" + e.getMessage(), Toast.LENGTH_LONG).show();
+            // 插入失败
+            return false;
+        }
     }
 
 

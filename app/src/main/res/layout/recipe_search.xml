@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="80dp"
-        android:layout_height="56dp"
+        android:layout_width="75dp"
+        android:layout_height="46dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
 
