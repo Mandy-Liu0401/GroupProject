@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+@author Mengying Liu
+@Student No. 041086143
+@date Mar 25, 2024
+@labSecNo. 021
+@purpose It manages bottom navi menu structure
+-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item

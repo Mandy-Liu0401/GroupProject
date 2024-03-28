@@ -1,3 +1,13 @@
+/**
+ * This page takes user input, allows to save a term to vocabulary
+ *
+ * @author Mengying Liu
+ * @Student No. 041086143
+ * @date Mar 25, 2024
+ * @labSecNo. 021
+ * @purpose It allows users to search terms and save terms
+ *
+ */
 package algonquin.cst2335.groupproject.mengyingAPI;
 
 import android.app.AlertDialog;
@@ -38,11 +48,12 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
     private static final String URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
     private TextView wordTextView;
     private TextView definitionTextView;
-
     private String definitionsResult;
     private RequestQueue queue;
 
-    // Define a key for the SharedPreferences
+    /**
+     * name of SharedPreferences file
+     */
     private static final String PREFS_NAME = "Dictionary";
     private static final String USER_INPUT_KEY = "user_input";
     private static final String WORD_KEY = "saved_term";
@@ -52,6 +63,12 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
     ActivityDictionaryApiBinding binding ;
     Vocabulary vocabulary;
 
+    /**
+     * page start point
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,14 +126,8 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             String my_url = URL+userInput;
             fetchDictionary(my_url);
 
-            String termDefinition = binding.definitionTextView.getText().toString();
+           SharedPreferences.Editor editor = prefs.edit();
 
-            // Save the user input to SharedPreferences
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(USER_INPUT_KEY, userInput);
-            editor.putString(WORD_KEY,userInput);
-            editor.putString(DEFINITION_KEY,termDefinition);
-            editor.apply();
 
 
         });
@@ -159,6 +170,10 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         });
     }
 
+    /**
+     * method to get search result from internet based on url
+     * @param url url for each term
+     */
     private void fetchDictionary(String url) {
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
@@ -196,6 +211,13 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
                     definitionsResult = definitionsBuilder.toString();
                     definitionTextView.setText(definitionsResult);
 
+                    SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                    // Save the user input to SharedPreferences
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(USER_INPUT_KEY, word);
+                    editor.putString(WORD_KEY,word);
+                    editor.putString(DEFINITION_KEY,definitionsResult);
+                    editor.apply();
                 });
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -214,17 +236,21 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-
+    /**
+     * stop method when the app stops
+     */
     @Override
     protected void onStop() {
         super.onStop();
         if (queue != null) {
             queue.cancelAll(URL_TAG);
-            //queue.stop();
+
         }
     }
 
-    // Method to show AlertDialog with instructions
+    /**
+     * Method to show AlertDialog with instructions
+     */
     protected void showInstructionsAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

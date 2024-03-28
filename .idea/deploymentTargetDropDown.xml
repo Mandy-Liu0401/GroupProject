@@ -2,22 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="Activity_DictionaryAPI">
+        <State />
+      </entry>
+      <entry key="Activity_Dictionary_API_Test">
+        <State />
+      </entry>
       <entry key="SunHomeTest">
         <State />
       </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testAddToFavourite()">
+      <entry key="userInput_translate_Test()">
         <State />
       </entry>
-      <entry key="testDeleteFavouriteLocation()">
-        <State />
-      </entry>
-      <entry key="testDisplayFavouriteList()">
-        <State />
-      </entry>
-      <entry key="testSharedPreferences()">
+      <entry key="vocabulary_inserted_Test()">
         <State />
       </entry>
     </value>
