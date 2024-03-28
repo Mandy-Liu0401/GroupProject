@@ -25,11 +25,7 @@
         </activity>
 
 
-        <activity
-            android:name=".wenxinAPI.SearchRecipeActivity"
-            android:exported="true">
-            <!-- 如果这个 Activity 需要从其他应用接受 Intent，可以在这里添加相应的 intent-filter -->
-        </activity>
+
 
         <activity
             android:name=".MainActivity"

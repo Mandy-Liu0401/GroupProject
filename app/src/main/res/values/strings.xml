@@ -21,6 +21,7 @@
     <string name="recipe_save">Save</string>
     <string name="recipe_remove">Remove</string>
     <string name="saved_list">Saved Recipes List </string>
+    <string name="recipe_help">Help</string>
 
 
 </resources>

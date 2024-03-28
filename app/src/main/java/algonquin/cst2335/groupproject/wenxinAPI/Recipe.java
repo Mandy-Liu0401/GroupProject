@@ -2,6 +2,7 @@ package algonquin.cst2335.groupproject.wenxinAPI;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -20,22 +21,32 @@ public class Recipe {
     @ColumnInfo(name = "SourceURL")
     protected String sourceURL;
 
-    public Recipe() {
-    }
-    public Recipe(int recipeID, String title, String imageURL){
-        this.recipeID=recipeID;
-        this.title=title;
-        this.imageURL=imageURL;
+    public Recipe(){
+
     }
 
-    public Recipe(int id, int recipeID, String title, String imageURL, String summary, String sourceURL) {
-        this.id = id;
-        this.recipeID = recipeID;
-        this.title = title;
-        this.imageURL = imageURL;
-        this.summary = summary;
-        this.sourceURL = sourceURL;
+    public Recipe( String title, String imageURL, String summary, String sourceURL,int recipeID) {
+
+        this.title=title;
+        this.imageURL=imageURL;
+        this.summary=summary;
+        this.sourceURL=sourceURL;
+        this.recipeID=recipeID;
     }
+//    public Recipe(int recipeID, String title, String imageURL){
+//        this.recipeID=recipeID;
+//        this.title=title;
+//        this.imageURL=imageURL;
+//    }
+//    @Ignore
+//    public Recipe(int id, int recipeID, String title, String imageURL, String summary, String sourceURL) {
+//        this.id = id;
+//        this.recipeID = recipeID;
+//        this.title = title;
+//        this.imageURL = imageURL;
+//        this.summary = summary;
+//        this.sourceURL = sourceURL;
+//    }
 
     public int getId() {
         return id;
