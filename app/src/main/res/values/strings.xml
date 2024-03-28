@@ -10,7 +10,6 @@
     <!-- Dictionary -->
     <string name="translate_button">Translate</string>
     <string name="hint">Enter the word.</string>
-    <string name="home">New Search</string>
     <string name="second">Saved Vocabulary</string>
     <string name="third">Help</string>
     <string name="save_button">Save</string>
@@ -30,6 +29,9 @@
     <string name="delete_all_title">Empty the whole vocabulaey.</string>
     <string name="delete_all_body">Are you sure you want to empty the vocabulary?</string>
     <string name="delete_all_after">The whole vocabulary is now empty.</string>
+    <string name="home_icon">Exit the app</string>
+    <string name="home_id">New Search</string>
+
 
 
     <!-- Sunrise & Sunset -->
@@ -81,5 +83,7 @@
     <string name="sunfav_goback">Go Back</string>
     <!-- SunHomeTese.java-->
     <string name="suntest_date" translatable="false">2024-06-08</string>
+    <string name="exit_message">Do you want to exit the APP and return to the main API entrance?</string>
+
 
 </resources>

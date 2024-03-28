@@ -43,9 +43,10 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
     private RequestQueue queue;
 
     // Define a key for the SharedPreferences
-    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREFS_NAME = "Dictionary";
     private static final String USER_INPUT_KEY = "user_input";
-
+    private static final String WORD_KEY = "saved_term";
+    private static final String DEFINITION_KEY = "saved_definition";
     private RecyclerView.Adapter myAdapter;
     private VocabularyDAO vDao;
     ActivityDictionaryApiBinding binding ;
@@ -58,17 +59,21 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Initialize SharedPreferences
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         // Restore the user input from SharedPreferences
         String savedInput = prefs.getString(USER_INPUT_KEY, "");
+        String savedDefinition = prefs.getString(DEFINITION_KEY, "");
+        String savedWord = prefs.getString(WORD_KEY,"");
+
         binding.editText.setText(savedInput);
+        binding.wordTextView.setText(savedWord);
+        binding.definitionTextView.setText(savedDefinition);
+
 
         //initialize two textView and set initial values to null.
         wordTextView = binding.wordTextView;
         definitionTextView = binding.definitionTextView;
-        wordTextView.setText("");
-        definitionTextView.setText("");
 
         BottomNavigationView bottomNavigationView = binding.include2.bottomNavigation;
         // Set Home selected
@@ -96,17 +101,24 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
 
         //set up translate button listener
         binding.translateButton.setOnClickListener(v -> {
+
             // Get the text from EditText
             String userInput = binding.editText.getText().toString().trim();
-
-            // Save the user input to SharedPreferences
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(USER_INPUT_KEY, userInput);
-            editor.apply();
 
             // Construct the complete URL by appending the user input
             String my_url = URL+userInput;
             fetchDictionary(my_url);
+
+            String termDefinition = binding.definitionTextView.getText().toString();
+
+            // Save the user input to SharedPreferences
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString(USER_INPUT_KEY, userInput);
+            editor.putString(WORD_KEY,userInput);
+            editor.putString(DEFINITION_KEY,termDefinition);
+            editor.apply();
+
+
         });
 
         VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,

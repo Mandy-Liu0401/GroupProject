@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         else if (id == R.id.item_3) {
             Intent intent = new Intent(this, Activity_DictionaryAPI.class);
             startActivity(intent);
-            return true;
+
         }
 
         else if (id == R.id.item_4) {

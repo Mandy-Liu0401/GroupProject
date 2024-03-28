@@ -3,18 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/view"
-        android:icon="@drawable/view"
-        android:title="Item"
+        android:id="@+id/exit_icon"
+        android:icon="@drawable/exit"
+        android:title="@string/home_icon"
         app:showAsAction="always" />
     <item
-        android:id="@+id/delete"
-        android:icon="@drawable/delete"
-        android:title="Item"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/empty"
+        android:id="@+id/empty_icon"
         android:icon="@drawable/empty"
-        android:title="Item"
+        android:title="@string/delete_all_title"
         app:showAsAction="always" />
 </menu>

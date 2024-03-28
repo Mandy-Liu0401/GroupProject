@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,45 +7,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saved_recycleView"
-        android:layout_width="379dp"
-        android:layout_height="729dp"
+
+        android:layout_width="396dp"
+        android:layout_height="723dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_icon"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/empty_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/saved_recycleView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
-        app:layout_constraintStart_toEndOf="@+id/delete_icon"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageView
-        android:id="@+id/delete_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/view_icon"
-        app:layout_constraintBottom_toTopOf="@+id/saved_recycleView"
-        app:srcCompat="@drawable/delete"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <ImageView
-        android:id="@+id/view_icon"
-        android:layout_width="72dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/saved_recycleView"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/view" />
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <include
         android:id="@+id/include2"

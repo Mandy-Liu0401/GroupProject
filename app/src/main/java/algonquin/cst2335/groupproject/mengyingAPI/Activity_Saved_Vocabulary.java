@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,19 +21,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import androidx.room.Room;
 
-import com.android.volley.RequestQueue;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivitySavedVocabularyBinding;
-
-
 
 public class Activity_Saved_Vocabulary extends AppCompatActivity {
     ActivitySavedVocabularyBinding binding;
@@ -43,10 +39,7 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
     private VocabularyDAO vDao;
     private DictionaryAPIViewModel dictionaryModel;
     private VocabularyDatabase db;
-
     private ArrayList<Vocabulary> terms;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +68,8 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
             return false;
         });
 
-
         // Initialize ViewModel
         dictionaryModel = new ViewModelProvider(this).get(DictionaryAPIViewModel.class);
-
-
 
         if (terms == null) {
             terms = new ArrayList<>();
@@ -101,6 +91,7 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
         dictionaryModel.getTerms().observe(this, terms -> {
             // Update the data source of the adapter
             myAdapter.setTerms(terms);
+
         });
 
         //initialize RecyclerView after rotating
@@ -176,10 +167,21 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                     Toast.makeText(this, getString(R.string.delete_all_after), Toast.LENGTH_LONG).show();
                 })
                 .create().show();
+    }
 
+    protected void exit(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Saved_Vocabulary.this);
+        builder.setMessage((getString(R.string.exit_message) ))
+                .setTitle(getString(R.string.question_title))
+                .setNegativeButton(getString(R.string.dialog_button_no), (dialog, cl) -> {
+                })
+                .setPositiveButton(getString(R.string.dialog_button_yes), (dialog, cl) -> {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                })
+                .create().show();
     }
         private class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.ViewHolder> {
-
             private ArrayList<Vocabulary> terms = new ArrayList<>();
 
             @NonNull
@@ -195,19 +197,12 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
             //where you set the objects in your layout for the row.
             //set the data for your ViewHolder object that will go at row position in the list
             public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-
                 Vocabulary obj = terms.get(position);
 
                 holder.termText.setText(obj.getTerm());
                 holder.definitionText.setText(obj.getDefinitions());
 
-//                //holder.itemView.setOnClickListener(clic
-//                holder.delete_icon.setOnClickListener(click -> delete_term(obj, position));
-//                holder.review_icon.setOnClickListener(click -> view_term(obj));
-//                holder.empty_icon.setOnClickListener(click -> emptyAll());
-
-
+                holder.delete_icon.setOnClickListener(click -> delete_term(obj, position));
             }
 
             @Override
@@ -223,14 +218,13 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                 TextView termText;
                 TextView definitionText;
                 ImageView delete_icon;
-                ImageView review_icon;
-                ImageView empty_icon;
 
                 public ViewHolder(@NonNull View itemView) {
                     super(itemView);
 
                     termText = itemView.findViewById(R.id.termText);
                     definitionText = itemView.findViewById(R.id.definitionText);
+                    delete_icon = itemView.findViewById(R.id.delete_icon);
 
                     itemView.setOnClickListener(click-> {
                      int position = getAbsoluteAdapterPosition();
@@ -250,14 +244,10 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.view) {
-
+        if (id == R.id.exit_icon) {
+            exit();
         }
-
-        else if (id == R.id.delete) {
-
-        }
-        else if (id == R.id.empty){
+        else if (id == R.id.empty_icon){
             emptyAll();
         }
         return super.onOptionsItemSelected(item);
