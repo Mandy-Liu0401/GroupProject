@@ -4,7 +4,7 @@
     Author: Zimeng Wang, Student ID: 041095956
     Date: March 26, 2024
     Lab Section: CST2335 - 021
-    Purpose: This XML layout file is used for displaying the favourite locations in a RecyclerView.
+    Purpose: This layout file is used for displaying the favourite locations in a RecyclerView.
 -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-    Author: Zimeng Wang, Student ID: 041095956
+    Author: Zimeng Wang, 041095956
     Date: March 26, 2024
     Lab Section: CST2335 - 021
     Purpose: This layout is designed for the SunHome activity, which displays sunrise and sunset times
@@ -175,7 +175,7 @@
 
   <Button
     android:id="@+id/btn_sunhome_search"
-    android:layout_width="120dp"
+    android:layout_width="125dp"
     android:layout_height="wrap_content"
     android:backgroundTint="#E4575D"
     android:fontFamily="@font/roboto"
@@ -188,7 +188,7 @@
 
   <Button
     android:id="@+id/btn_sunhome_fav"
-    android:layout_width="wrap_content"
+    android:layout_width="125dp"
     android:layout_height="wrap_content"
     android:layout_marginEnd="24dp"
     android:backgroundTint="#E4575D"
@@ -240,7 +240,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="80dp"
     android:fontFamily="@font/roboto_bold"
-    android:text="TextView"
+    android:text="@string/sunhome_date"
     android:textSize="20sp"
     app:layout_constraintBottom_toBottomOf="@+id/sunhome_dateicon"
     app:layout_constraintEnd_toStartOf="@+id/btn_sunhome_addfav"
