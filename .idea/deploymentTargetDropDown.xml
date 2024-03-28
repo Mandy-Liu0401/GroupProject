@@ -6,19 +6,20 @@
         <State />
       </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="testAddToFavourite()">
-        <State />
-      </entry>
-      <entry key="testDeleteFavouriteLocation()">
-        <State />
-      </entry>
-      <entry key="testDisplayFavouriteList()">
-        <State />
-      </entry>
-      <entry key="testSharedPreferences()">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\jamie\.android\avd\Pixel_2_API_27.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-28T20:14:40.952100200Z" />
+        </State>
       </entry>
     </value>
   </component>
