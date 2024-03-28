@@ -4,7 +4,7 @@
     Author: Zimeng Wang
     Date: March 26, 2024
     Lab Section: CST2335 - 021
-    Purpose: This layout is designed for the SunHome activity in the Android application.
+    Purpose: Defines the options menu for the SunHome activity.
 -->
 
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,11 +13,11 @@
   <item
     android:id="@+id/menu_home"
     android:icon="@drawable/sun_menu_home"
-    android:title="Home"
+    android:title="@string/sunmenu_icon_home"
     app:showAsAction="always" />
   <item
     android:id="@+id/menu_about"
     android:icon="@drawable/sun_menu_about"
-    android:title="About"
+    android:title="@string/sunmenu_icon_about"
     app:showAsAction="always" />
 </menu>

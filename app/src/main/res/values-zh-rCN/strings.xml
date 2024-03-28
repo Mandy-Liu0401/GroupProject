@@ -38,7 +38,7 @@
     <string name="sunhome_output_time_format">hh:mm:ss a</string>
     <string name="sunhome_toast_error_fetching_data">获取数据错误</string>
     <string name="sunhome_date_format">yyyy-MM-dd</string>
-    <string name="sunhome_menutitle">追光</string>
+    <string name="sunhome_menutitle">逐光</string>
     <string name="sunfav_delete">删除收藏位置</string>
     <string name="sunfav_deleteconfirmation">确定删除吗？</string>
     <string name="sunfav_deleteyes">是</string>
@@ -56,8 +56,8 @@
     <string name="sunhome_search_hint_lng">"  纬度"</string>
     <string name="sunhome_search">搜索</string>
     <string name="sunhome_favourites">收藏</string>
-    <string name="sunhome_sunrise_label">日出</string>
-    <string name="sunhome_sunset_label">日落</string>
+    <string name="sunhome_sunrise_label">日出时间</string>
+    <string name="sunhome_sunset_label">日落时间</string>
     <string name="sunhome_sunrise_time">日出时间</string>
     <string name="sunhome_sunset_time">日落时间</string>
     <string name="sunhome_latitude">经度</string>
@@ -70,12 +70,18 @@
     3. 点击添加按钮将位置保存到您的收藏夹。\n\n
     4. 使用菜单选项在屏幕之间导航。\n
     </string>
+
+
+
+  <string name="sunmenu_icon_home">主页</string>
+    <string name="sunmenu_icon_about">关于</string>
     <string name="delete_all_title">清空我的单词簿</string>
     <string name="delete_all_body">请确认一键清空单词簿。</string>
     <string name="delete_all_after">单词簿已清空。</string>
     <string name="home_icon">退出此程序</string>
     <string name="home_id">新的查询</string>
     <string name="exit_message">是否关闭程序并回到主界面？</string>
+
 
 
 </resources>
