@@ -11,13 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,9 +75,22 @@ public class RecipesActivity extends AppCompatActivity {
             }
         });
 
+
+
         initializeRecyclerView();
         //loadMessagesFromDatabase();
+
+
+
         initializeSendReceiveButtons();
+
+        // 假设您的EditText的id是edit_search
+        EditText searchField = findViewById(R.id.enterRecipe);
+        searchField.setText(getLastSearchTerm());
+
+
+
+
 
 
     }
@@ -116,6 +132,11 @@ public class RecipesActivity extends AppCompatActivity {
 
     private void initializeSendReceiveButtons() {
         binding.searchRecipeButton.setOnClickListener(v -> searchRecipe(true));
+
+
+
+
+
     }
 
 
@@ -124,6 +145,10 @@ public class RecipesActivity extends AppCompatActivity {
         recipeViewModel.recipes.setValue(new ArrayList<>());
         requestQueue = Volley.newRequestQueue(this);
         String query = binding.enterRecipe.getText().toString().trim();
+        //saved to file
+        EditText searchField = findViewById(R.id.enterRecipe);
+        String searchTerm = searchField.getText().toString();
+        saveSearchTerm(searchTerm);
 
         String url = "https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&apiKey=" + "abb4102db3714c6eb68729fbb6ad77fd";
 
@@ -138,6 +163,25 @@ public class RecipesActivity extends AppCompatActivity {
                 });
         // add to queue
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void saveSearchTerm(String searchTerm) {
+        // 获取SharedPreferences实例，"AppPreferences"是文件名
+        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // 使用键值对来保存搜索词，"LastSearchTerm"是键名
+        editor.putString("LastSearchTerm", searchTerm);
+
+        // 提交更改
+        editor.apply();
+    }
+    public String getLastSearchTerm() {
+        // 获取SharedPreferences实例
+        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
+
+        // 读取键名为"LastSearchTerm"的值，如果不存在则返回空字符串""
+        return sharedPreferences.getString("LastSearchTerm", "");
     }
 
     private void parseRecipesResponse(JSONObject response) {
