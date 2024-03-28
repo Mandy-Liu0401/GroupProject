@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
 
-
-      <activity android:name=".mengyingAPI.Activity_DictionaryAPI">
-        </activity>
+        <!-- DictionaryAPI -->
+        <activity android:name=".mengyingAPI.Activity_DictionaryAPI"/>
+        <activity android:name=".mengyingAPI.Activity_Saved_Vocabulary"/>
 
       <!-- Sunrise & Sunset -->
       <activity

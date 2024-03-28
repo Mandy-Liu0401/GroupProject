@@ -13,7 +13,7 @@ public interface VocabularyDAO {
     void insertTerm(Vocabulary term);
 
     @Query( "Select * from Vocabulary")
-    public List<Vocabulary> getAllTerms();
+     List<Vocabulary> getAllTerms();
 
     @Delete
     void deleteTerm(Vocabulary term);

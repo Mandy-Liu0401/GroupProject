@@ -126,11 +126,18 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
                 if (existingVocabulary == null ) {
                     // Entry does not exist, so insert the new vocabulary
                     db.vDAO().insertTerm(vocabulary);
-                    // Optionally, display a message indicating successful insertion
+                    // display a message indicating successful insertion
                     runOnUiThread(() -> {
                         Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_successful), Toast.LENGTH_SHORT).show();
                     });
-                } else {
+                }
+                if (definitions == null){
+                    // display a message indicating not found result
+                    runOnUiThread(() -> {
+                        Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.error_message), Toast.LENGTH_SHORT).show();
+                    });
+
+                } if (existingVocabulary != null ){
                     // Entry already exists, so display a message indicating duplication
                     runOnUiThread(() -> {
                         Toast.makeText(Activity_DictionaryAPI.this, getString(R.string.save_unsuccessful), Toast.LENGTH_SHORT).show();

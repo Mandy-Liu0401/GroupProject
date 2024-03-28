@@ -71,7 +71,9 @@
     3. 点击添加按钮将位置保存到您的收藏夹。\n\n
     4. 使用菜单选项在屏幕之间导航。\n
     </string>
-
+    <string name="delete_all_title">清空我的单词簿</string>
+    <string name="delete_all_body">请确认一键清空单词簿。</string>
+    <string name="delete_all_after">单词簿已清空。</string>
 
 
 </resources>
