@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.groupproject.MainActivity;
@@ -317,20 +318,38 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
-    public boolean saveRecipe(Recipe recipe) {
-        try {
-            Log.d("RecipesActivity", "click save recipe");
-            rDAO.insertRecipe(recipe);
-            Toast.makeText(RecipesActivity.this, "Recipe saved", Toast.LENGTH_LONG).show();
-            // 插入成功
-            return true;
-        } catch (Exception e) {
-            Log.d("RecipesActivity", "菜谱详情显示完毕");
-            Toast.makeText(RecipesActivity.this, "error saved" + e.getMessage(), Toast.LENGTH_LONG).show();
-            // 插入失败
-            return false;
-        }
+    public void saveRecipe(Recipe recipe) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                Log.d("RecipesActivity", "click save recipe");
+                rDAO.insertRecipe(recipe);
+                // 插入成功，注意，这里不更新UI，故不需要在UI线程中执行操作
+                Log.d("RecipesActivity", "Recipe saved successfully.");
+            } catch (Exception e) {
+                Log.e("RecipesActivity", "Error saving recipe: " + e.getMessage());
+                // 插入失败处理
+            } finally {
+                executor.shutdown(); // 不要忘记关闭Executor
+            }
+        });
     }
+
+//    public boolean saveRecipe(Recipe recipe) {
+//        try{
+//
+//            Log.d("RecipesActivity", "click save recipe");
+//            rDAO.insertRecipe(recipe);
+//            Toast.makeText(RecipesActivity.this, "Recipe saved", Toast.LENGTH_LONG).show();
+//            // 插入成功
+//            return true;
+//        } catch (Exception e) {
+//            Log.d("RecipesActivity", "菜谱详情显示完毕");
+//            Toast.makeText(RecipesActivity.this, "error saved" + e.getMessage(), Toast.LENGTH_LONG).show();
+//            // 插入失败
+//            return false;
+//        }
+//    }
 
 
 }
