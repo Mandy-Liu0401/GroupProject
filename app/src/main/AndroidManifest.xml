@@ -25,7 +25,8 @@
 
         <!-- DictionaryAPI -->
         <activity android:name=".mengyingAPI.Activity_DictionaryAPI"/>
-        <activity android:name=".mengyingAPI.Activity_Saved_Vocabulary"/>
+        <activity android:name=".mengyingAPI.Activity_Saved_Vocabulary"
+            android:label="@string/API_name"/>
 
       <!-- Sunrise & Sunset -->
       <activity

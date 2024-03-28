@@ -1,3 +1,13 @@
+/**
+ * This page will display all terms saved in local database,
+ *
+ * @author Mengying Liu
+ * @Student No. 041086143
+ * @date Mar 25, 2024
+ * @labSecNo. 021
+ * @purpose It allows users to view each term, delete each term, and empty all terms with the icon in the right top corner.
+ *
+ */
 package algonquin.cst2335.groupproject.mengyingAPI;
 
 import android.app.AlertDialog;
@@ -33,14 +43,42 @@ import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivitySavedVocabularyBinding;
 
 public class Activity_Saved_Vocabulary extends AppCompatActivity {
+
+    /**
+     * binding variable linked with corresponding file
+     */
     ActivitySavedVocabularyBinding binding;
+    /**
+     * recycle view object
+     */
     private RecyclerView recycleView;
+    /**
+     * adapter object
+     */
     private SavedAdapter myAdapter;
+    /**
+     * Dao object for manipulate local database
+     */
     private VocabularyDAO vDao;
+    /**
+     * viewModel object for live data array terms
+     */
     private DictionaryAPIViewModel dictionaryModel;
+    /**
+     * database variable represent vocabulary db
+     */
     private VocabularyDatabase db;
+    /**
+     * array list terms used to hold each vocabulary object
+     */
     private ArrayList<Vocabulary> terms;
 
+    /**
+     * app start point method, it initiates recycleView and viewModel
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +108,24 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
 
         // Initialize ViewModel
         dictionaryModel = new ViewModelProvider(this).get(DictionaryAPIViewModel.class);
+        // Observe LiveData to update the adapter's data source when data changes
+        dictionaryModel.getTerms().observe(this, terms -> {
+            // Update the data source of the adapter
+            myAdapter.setTerms(terms);
 
-        if (terms == null) {
+        });
+
+        //initialize RecyclerView after rotating
+        recycleView = findViewById(R.id.saved_recycleView);
+
+        myAdapter = new SavedAdapter();
+        recycleView.setAdapter(myAdapter);
+        recycleView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        // Check if ViewModel already has data
+        if (dictionaryModel.getTerms().getValue() == null || dictionaryModel.getTerms().getValue().isEmpty()) {
+            // Load data from database
             terms = new ArrayList<>();
 
             // Initialize database and DAO
@@ -87,22 +141,11 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
             });
         }
 
-        // Observe LiveData to update the adapter's data source when data changes
-        dictionaryModel.getTerms().observe(this, terms -> {
-            // Update the data source of the adapter
-            myAdapter.setTerms(terms);
-
-        });
-
-        //initialize RecyclerView after rotating
-        recycleView = findViewById(R.id.saved_recycleView);
-
-        myAdapter = new SavedAdapter();
-        recycleView.setAdapter(myAdapter);
-        recycleView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
+    /**
+     * this method prompts an instruction when clicking help tab
+     */
     protected void showInstructionsAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -112,6 +155,12 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                     dialog.dismiss();
                 }).show();
     }
+
+    /**
+     * this method is responsible for deleting a term from vocabulary
+     * @param obj the Vocabulary object retrieved by position
+     * @param position position of the term in array terms
+     */
     public void delete_term(Vocabulary obj, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Saved_Vocabulary.this);
         builder.setMessage((getString(R.string.question_body) + obj.getTerm()))
@@ -139,6 +188,10 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                 .create().show();
     }
 
+    /**
+     * this method allows user to view each term's definitions.
+     * @param obj
+     */
     public void view_term(Vocabulary obj) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Saved_Vocabulary.this);
         builder.setMessage(obj.getDefinitions())
@@ -148,6 +201,9 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                 .create().show();
     }
 
+    /**
+     * this method flush all record in Vocabulary database
+     */
     protected void emptyAll() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Saved_Vocabulary.this);
         builder.setMessage(getString(R.string.delete_all_body))
@@ -169,6 +225,9 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
                 .create().show();
     }
 
+    /**
+     * this method exits this app and return to the main entrance
+     */
     protected void exit(){
         AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Saved_Vocabulary.this);
         builder.setMessage((getString(R.string.exit_message) ))
@@ -184,32 +243,50 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
         private class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.ViewHolder> {
             private ArrayList<Vocabulary> terms = new ArrayList<>();
 
+            /**
+             * This is responsible for creating a layout for a row, and setting the TextViews in code.
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to
+             *                 an adapter position.
+             * @param viewType The view type of the new View.
+             * @return ViewHolder
+             */
             @NonNull
             @Override
-            //This is responsible for creating a layout for a row, and setting the TextViews in code.
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 // For each record, inflate vocabulary layout
                 View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vocabulary, parent, false);
                 return new ViewHolder(itemView);
             }
 
+            /**
+             * where you set the objects in your layout for the row.
+             * @param holder   The ViewHolder which should be updated to represent the contents of the
+             *                 item at the given position in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
-            //where you set the objects in your layout for the row.
-            //set the data for your ViewHolder object that will go at row position in the list
             public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
                 Vocabulary obj = terms.get(position);
 
                 holder.termText.setText(obj.getTerm());
                 holder.definitionText.setText(obj.getDefinitions());
 
-                holder.delete_icon.setOnClickListener(click -> delete_term(obj, position));
+                holder.view_icon.setOnClickListener(click -> view_term(obj));
             }
 
+            /**
+             * count the number of element in the array terms
+             * @return int
+             */
             @Override
             public int getItemCount() {
                 return terms.size();
             }
 
+            /**
+             * notifies the adapter  whenever there is an update
+             * @param terms
+             */
             public void setTerms(ArrayList<Vocabulary> terms) {
                 this.terms = terms;
                 notifyDataSetChanged();
@@ -217,22 +294,33 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
             private class ViewHolder extends RecyclerView.ViewHolder {
                 TextView termText;
                 TextView definitionText;
-                ImageView delete_icon;
+                ImageView view_icon;
 
+                /**
+                 * constructor for creating a viewHolder
+                 * @param itemView
+                 */
                 public ViewHolder(@NonNull View itemView) {
                     super(itemView);
 
                     termText = itemView.findViewById(R.id.termText);
                     definitionText = itemView.findViewById(R.id.definitionText);
-                    delete_icon = itemView.findViewById(R.id.delete_icon);
+                    view_icon = itemView.findViewById(R.id.view_icon);
 
                     itemView.setOnClickListener(click-> {
                      int position = getAbsoluteAdapterPosition();
-                     view_term(terms.get(position));
+                     delete_term(terms.get(position),position);
                     });
                 }
             }
         }
+
+    /**
+     * responsible for loading teh specific menu
+     * @param menu The options menu in which you place your items.
+     *
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -240,6 +328,12 @@ public class Activity_Saved_Vocabulary extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * implementation for each menu item
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
