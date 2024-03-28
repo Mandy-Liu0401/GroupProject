@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="72dp"
         android:text="@string/translate_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/save_button"
@@ -33,7 +33,12 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/bottom_navigation" />
+        layout="@layout/bottom_navigation"
+        android:layout_marginEnd="393dp"
+        android:layout_marginBottom="851dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/definitionTextView"
@@ -82,7 +87,7 @@
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="72dp"
         android:text="@string/save_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
