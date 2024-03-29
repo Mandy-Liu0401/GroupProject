@@ -5,12 +5,16 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
@@ -18,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.core.app.ActivityScenario;
+
 import androidx.test.espresso.ViewInteraction;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -28,6 +32,7 @@ import androidx.test.filters.LargeTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +71,9 @@ public class DictionaryTest {
         textView.check(matches(withText("one")));
     }
 
-
+    /**
+     * this method asserts when go to vocabulary, all saved term will be displayed.
+     */
     @Test
     public void vocabulary_show_Test() {
 
@@ -87,9 +94,52 @@ public class DictionaryTest {
         ViewInteraction textView = onView(withId(R.id.termText));
         textView.check(matches(withText("one")));
     }
+
+    /**
+     * this test asserts when clicking on help button, a manual instruction will be prompted.
+     */
+    @Test
+    public void help_test() {
+
+        ViewInteraction bottomNavigationItemView = onView(withId(R.id.third_id));
+        bottomNavigationItemView.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(IsInstanceOf.<View>instanceOf(android.widget.TextView.class), withText("Instruction for Dictionary API"),
+                        withParent(allOf(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                        isDisplayed()));
+        textView.check(matches(withText("Instruction for Dictionary API")));
+
+    }
+
+    /**
+     * this test asserts after exit_icon pressed, user will redirected to main page with hello message
+     */
+    @Test
+    public void exit_test() {
+        ViewInteraction vocabulary_page = onView(withId(R.id.second_id));
+        vocabulary_page.perform(click());
+
+        ViewInteraction exit_icon= onView(withId(R.id.exit_icon));
+        exit_icon.perform(click());
+
+        ViewInteraction yesButton = onView(withId(android.R.id.button1));
+        yesButton.perform(scrollTo(), click());
+
+        ViewInteraction textView = onView(withId(R.id.textView));
+        textView.check(matches(withText("Welcome to the final project")));
+    }
+
+
+    /**
+     * this test saves 2 words to local vocabulary, and after deleting the first one,
+     * it left with the later term.
+     */
     @Test
     public void vocabulary_deleted_Test() {
 
+        //input, translate and save the first term
         ViewInteraction inputBox = onView(withId(R.id.editText));
         inputBox.perform(replaceText("one"), closeSoftKeyboard());
 
@@ -104,7 +154,7 @@ public class DictionaryTest {
             e.printStackTrace();
         }
 
-
+        //input, translate and save the second term
         inputBox.perform(replaceText("two"), closeSoftKeyboard());
         materialButton.perform(click());
         materialButton2.perform(click());
@@ -118,19 +168,28 @@ public class DictionaryTest {
         ViewInteraction actionMenuItemView2 = onView(withId(R.id.second_id));
         actionMenuItemView2.perform(click());
 
+        //delete the first term
         ViewInteraction recyclerView = onView(withId(R.id.saved_recycleView));
-        //click on one itemView
+
         recyclerView.perform(actionOnItemAtPosition(0, click()));
-        //click on "Yes" button to implement deletion
         ViewInteraction materialButton3 = onView(allOf(withId(android.R.id.button1), withText("Yes"),
                 childAtPosition(
                         childAtPosition(withClassName(is("android.widget.ScrollView")), 0),
                         3)));
         materialButton3.perform(click());
 
+        //the left term is comparing with the second term indeed
         ViewInteraction textView = onView(withId(R.id.termText));
         textView.check(matches(withText("two")));
     }
+
+    /**
+     * This method creates a matcher for selecting a child view at a specific position
+     * within a parent RecyclerView.
+     * @param parentMatcher A matcher for selecting the parent RecyclerView.
+     * @param position The position of the child view
+     * @return A matcher for selecting the child view at the specified position
+     */
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
