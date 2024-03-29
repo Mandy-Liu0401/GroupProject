@@ -43,24 +43,59 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Activity_DictionaryAPI extends AppCompatActivity {
-    private final String TAG = getClass().getSimpleName();
+
+    /**
+     *  This tag is used to identify and cancel specific requests later
+     */
     private static final String URL_TAG = "DICTIONARY_API";
+    /**
+     * this string variable stores teh first part of url
+     */
     private static final String URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+    /**
+     * this variable stores terms
+     */
     private TextView wordTextView;
+    /**
+     * this variable stores definitions
+     */
     private TextView definitionTextView;
+
+    /**
+     * this variable will store concatenated definition string
+     */
     private String definitionsResult;
+    /**
+     * stores request queue when using volley
+     */
     private RequestQueue queue;
 
     /**
      * name of SharedPreferences file
      */
     private static final String PREFS_NAME = "Dictionary";
+    /**
+     * key name for userinput
+     */
     private static final String USER_INPUT_KEY = "user_input";
+
+    /**
+     * key name for term saved in prefs file
+     */
     private static final String WORD_KEY = "saved_term";
+
+    /**
+     * key name for definitions saved in prefs file
+     */
     private static final String DEFINITION_KEY = "saved_definition";
-    private RecyclerView.Adapter myAdapter;
-    private VocabularyDAO vDao;
+    /**
+     * binding used to connect java code with corresponding layout widget
+     */
     ActivityDictionaryApiBinding binding ;
+
+    /**
+     * vocabulary object
+     */
     Vocabulary vocabulary;
 
     /**
@@ -125,11 +160,6 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             // Construct the complete URL by appending the user input
             String my_url = URL+userInput;
             fetchDictionary(my_url);
-
-           SharedPreferences.Editor editor = prefs.edit();
-
-
-
         });
 
         VocabularyDatabase db = Room.databaseBuilder(getApplicationContext(), VocabularyDatabase.class,
@@ -141,7 +171,7 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             String definitions = definitionsResult;
 
             vocabulary = new Vocabulary(userInput,definitions);
-            //db.vDAO().insertTerm(vocabulary);
+
             // Check if the entry already exists in the database
             Executor executor = Executors.newSingleThreadExecutor();
             executor.execute(() -> {
