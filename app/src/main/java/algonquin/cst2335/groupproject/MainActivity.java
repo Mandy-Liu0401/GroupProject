@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import algonquin.cst2335.groupproject.wenxinAPI.RecipesActivity;
 import algonquin.cst2335.groupproject.zimeng.SunHome;
 import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.item_2) {
+            Intent intentRecipe =new Intent(this, RecipesActivity.class);
+            startActivity(intentRecipe);
 
         }
 
