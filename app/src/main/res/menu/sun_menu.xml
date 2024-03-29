@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: Zimeng Wang
+    Date: March 26, 2024
+    Lab Section: CST2335 - 021
+    Purpose: Defines the options menu for the SunHome activity.
+-->
+
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/menu_home"
+    android:icon="@drawable/sun_menu_home"
+    android:title="@string/sunmenu_icon_home"
+    app:showAsAction="always" />
+  <item
+    android:id="@+id/menu_about"
+    android:icon="@drawable/sun_menu_about"
+    android:title="@string/sunmenu_icon_about"
+    app:showAsAction="always" />
+</menu>

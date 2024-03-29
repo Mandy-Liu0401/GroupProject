@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import algonquin.cst2335.groupproject.wenxinAPI.RecipesActivity;
 import algonquin.cst2335.groupproject.zimeng.SunHome;
 import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;

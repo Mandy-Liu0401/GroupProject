@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+@author Mengying Liu
+@Student No. 041086143
+@date Mar 25, 2024
+@labSecNo. 021
+@purpose It manages the format for exit and emptyAll two options
+-->
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/exit_icon"
+        android:icon="@drawable/exit"
+        android:title="@string/home_icon"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/empty_icon"
+        android:icon="@drawable/empty"
+        android:title="@string/delete_all_title"
+        app:showAsAction="always" />
+</menu>

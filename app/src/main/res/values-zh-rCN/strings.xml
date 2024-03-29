@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Dictinary -->
     <string name="app_name">小组作业</string>
     <string name="button1">日出日落查询入口</string>
     <string name="button2">菜单查询入口</string>
@@ -8,7 +10,6 @@
     <string name="hello_message">欢迎来到小组作业</string>
     <string name="translate_button">查询翻译</string>
     <string name="hint">请输入想要查询的词</string>
-    <string name="home">首页</string>
     <string name="second">已保存的词库</string>
     <string name="third">帮助</string>
     <string name="recipe_hint">请输入食谱</string>
@@ -28,4 +29,76 @@
     <string name="recipe_saved">食谱已保存</string>
     <string name="recipe_help_info">你好，欢迎使用菜谱查询软件！这个软件支持菜谱搜索，菜谱详情查看，保存菜谱到收藏列表，从收藏列表中查看详情和支持收藏菜谱数据的管理，可以删除不需要的菜谱。顶上的工具栏可以返回到主界面，搜索界面，收藏界面和帮助提示界面。作者：李文昕 版本：1.8</string>
     <string name="search_recipe_title">搜索食谱</string>
+    <string name="save_button">保存到我的词库</string>
+    <string name="error_message">查询不到结果，请查询新词</string>
+    <string name="API_name">字典</string>
+    <string name="instruction_title">用户手册</string>
+    <string name="instruction_body">1， 在“新的查询”菜单下， 请输入需要查询的单词， 如果没有结果返回， 请输入新单词。 2，你可以点击“保存”按钮以添加单词到你的单词簿。 3，在“单词簿”下， 你可以浏览保存的单词，并点击单个单词来删除，或者点击“清空单词簿”来删除整个单词簿。</string>
+    <string name="dialog_button_ok">已阅并关闭</string>
+    <string name="question_title">提问：</string>
+    <string name="question_body">是否要删除单词：</string>
+    <string name="dialog_button_no">否</string>
+    <string name="dialog_button_yes">是</string>
+    <string name="snackbar_message">你已删除单词：</string>
+    <string name="undo_button">撤回</string>
+    <string name="save_successful">已成功保存。</string>
+    <string name="save_unsuccessful">该单词已存在。</string>
+
+
+    <!-- Sunrise & Sunset -->
+    <string name="sunhome_toast_enter_lat_long">请输入经纬度</string>
+    <string name="sunhome_toast_location_added">已加收藏</string>
+    <string name="sunhome_toast_error_adding_location">已加收藏</string>
+    <string name="sunhome_toast_lookup_location_first">请先查询地理信息</string>
+    <string name="sunhome_toast_error_occured">错误</string>
+    <string name="sunhome_input_time_format">hh:mm:ss a</string>
+    <string name="sunhome_output_time_format">hh:mm:ss a</string>
+    <string name="sunhome_toast_error_fetching_data">获取数据错误</string>
+    <string name="sunhome_date_format">yyyy-MM-dd</string>
+    <string name="sunhome_menutitle">逐光</string>
+    <string name="sunfav_delete">删除收藏位置</string>
+    <string name="sunfav_deleteconfirmation">确定删除吗？</string>
+    <string name="sunfav_deleteyes">是</string>
+    <string name="sunfav_deleteno">否</string>
+    <string name="sunfav_deleteundo">撤销</string>
+    <string name="sunfav_deleted">已删除</string>
+    <string name="sunfav_latformat">经度: %1$f</string>
+    <string name="sunfav_lngformat">纬度: %1$f</string>
+    <string name="sunmenu_about">关于</string>
+    <string name="sunmenu_message_ok_button">知道了</string>
+    <string name="sunhome_latitude_label">经度：</string>
+    <string name="sunhome_longitude_label">纬度：</string>
+    <string name="sunhome_add">添加</string>
+    <string name="sunhome_search_hint_lat">"  经度"</string>
+    <string name="sunhome_search_hint_lng">"  纬度"</string>
+    <string name="sunhome_search">搜索</string>
+    <string name="sunhome_favourites">收藏</string>
+    <string name="sunhome_sunrise_label">日出时间</string>
+    <string name="sunhome_sunset_label">日落时间</string>
+    <string name="sunhome_sunrise_time">日出时间</string>
+    <string name="sunhome_sunset_time">日落时间</string>
+    <string name="sunhome_latitude">经度</string>
+    <string name="sunhome_longitude">日落</string>
+    <string name="sunfav_goback">返回</string>
+    <string name="sunmenu_about_message">
+    界面使用说明\n\n
+    1. 输入所需位置的纬度和经度。\n\n
+    2. 点击搜索按钮以检索日出和日落时间。\n\n
+    3. 点击添加按钮将位置保存到您的收藏夹。\n\n
+    4. 使用菜单选项在屏幕之间导航。\n
+    </string>
+
+
+
+  <string name="sunmenu_icon_home">主页</string>
+    <string name="sunmenu_icon_about">关于</string>
+    <string name="delete_all_title">清空我的单词簿</string>
+    <string name="delete_all_body">请确认一键清空单词簿。</string>
+    <string name="delete_all_after">单词簿已清空。</string>
+    <string name="home_icon">退出此程序</string>
+    <string name="home_id">新的查询</string>
+    <string name="exit_message">是否关闭程序并回到主界面？</string>
+
+
+
 </resources>

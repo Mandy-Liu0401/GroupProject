@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: Zimeng Wang, 041095956
+    Date: March 26, 2024
+    Lab Section: CST2335 - 021
+    Purpose: This layout is designed for the SunHome activity, which displays sunrise and sunset times
+    for a specified location.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/latitude_title"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".zimeng.SunHome">
+
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="0dp"
+      android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      android:backgroundTint="#F76C5F"
+      android:elevation="4dp"
+      android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+  <TextView
+      android:id="@+id/sunrise_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="76dp"
+      android:fontFamily="@font/roboto_medium"
+      android:text="@string/sunhome_sunrise_label"
+      android:textColor="#FB7954"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="@+id/sunhome_img"
+      app:layout_constraintTop_toBottomOf="@+id/sunhome_img" />
+
+  <TextView
+      android:id="@+id/sunset_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="125dp"
+      android:layout_marginEnd="86dp"
+      android:fontFamily="@font/roboto_medium"
+      android:text="@string/sunhome_sunset_label"
+      android:textColor="#FB7954"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      android:typeface="normal"
+      app:layout_constraintBaseline_toBaselineOf="@+id/sunrise_label"
+      app:layout_constraintEnd_toEndOf="@+id/sunset_time"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toEndOf="@+id/sunrise_label" />
+
+  <TextView
+      android:id="@+id/sunrise_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:fontFamily="@font/roboto_bold"
+      android:text="@string/sunhome_sunrise_time"
+      android:textColor="#E35C58"
+      android:textSize="28sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@+id/sunset_time"
+      app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+  <TextView
+      android:id="@+id/sunset_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="24dp"
+      android:layout_marginBottom="32dp"
+      android:fontFamily="@font/roboto_bold"
+      android:text="@string/sunhome_sunset_time"
+      android:textColor="#E35C58"
+      android:textSize="28sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/btn_sunhome_search"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/sunset_label" />
+
+  <ImageView
+      android:id="@+id/sunhome_img"
+      android:layout_width="424dp"
+      android:layout_height="218dp"
+      android:src="@drawable/sun_home_img"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.538"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.424" />
+
+  <TextView
+      android:id="@+id/longtitude"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:fontFamily="@font/roboto"
+      android:text="@string/sunhome_longitude"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@+id/lng_title"
+      app:layout_constraintEnd_toEndOf="@+id/btn_sunhome_addfav" />
+
+  <TextView
+      android:id="@+id/lat_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:fontFamily="@font/roboto"
+      android:text="@string/sunhome_latitude_label"
+      android:textSize="18sp"
+      app:layout_constraintBaseline_toBaselineOf="@+id/latitude"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+      android:id="@+id/latitude"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="2dp"
+      android:fontFamily="@font/roboto_medium"
+      android:text="@string/sunhome_latitude"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@+id/lng_title"
+      app:layout_constraintStart_toEndOf="@+id/lat_title" />
+
+  <TextView
+      android:id="@+id/lng_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="2dp"
+      android:layout_marginBottom="6dp"
+      android:fontFamily="@font/roboto"
+      android:text="@string/sunhome_longitude_label"
+      android:textSize="18sp"
+      app:layout_constraintBottom_toTopOf="@+id/sunhome_img"
+      app:layout_constraintEnd_toStartOf="@+id/longtitude" />
+
+  <EditText
+      android:id="@+id/input_lat"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:layout_marginTop="20dp"
+      android:drawableStart="@drawable/sun_home_search"
+      android:ems="10"
+      android:fontFamily="@font/roboto"
+      android:hint="@string/sunhome_search_hint_lat"
+      android:inputType="numberDecimal|numberSigned"
+      android:textColor="#676767"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toTopOf="@+id/input_long"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toBottomOf="@+id/sunset_time" />
+
+  <EditText
+      android:id="@+id/input_long"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginBottom="30dp"
+      android:drawableStart="@drawable/sun_home_search"
+      android:ems="10"
+      android:fontFamily="@font/roboto"
+      android:hint="@string/sunhome_search_hint_lng"
+      android:inputType="numberDecimal|numberSigned"
+      android:textColor="#676767"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+      android:id="@+id/btn_sunhome_search"
+      android:layout_width="125dp"
+      android:layout_height="wrap_content"
+      android:backgroundTint="#E4575D"
+      android:fontFamily="@font/roboto"
+      android:text="@string/sunhome_search"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@+id/input_lat"
+      app:layout_constraintEnd_toEndOf="@+id/btn_sunhome_fav"
+      app:layout_constraintHorizontal_bias="0.36"
+      app:layout_constraintStart_toStartOf="@+id/btn_sunhome_fav" />
+
+  <Button
+      android:id="@+id/btn_sunhome_fav"
+      android:layout_width="125dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="24dp"
+      android:backgroundTint="#E4575D"
+      android:fontFamily="@font/roboto"
+      android:text="@string/sunhome_favourites"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@+id/input_long"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <Button
+      android:id="@+id/btn_sunhome_addfav"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="28dp"
+      android:backgroundTint="#FDD174"
+      android:fontFamily="@font/roboto_bold"
+      android:text="@string/sunhome_add"
+      android:textColor="#E25B58"
+      android:textSize="16sp"
+      app:icon="@drawable/sun_home_add"
+      app:iconPadding="10dp"
+      app:iconTint="#E25B58"
+      app:layout_constraintBottom_toTopOf="@+id/longtitude"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/sunhome_date"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <TextView
+      android:id="@+id/sunhome_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="80dp"
+      android:fontFamily="@font/roboto_bold"
+      android:text="@string/sunhome_date"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@+id/btn_sunhome_addfav"
+      app:layout_constraintEnd_toStartOf="@+id/btn_sunhome_addfav"
+      app:layout_constraintStart_toEndOf="@+id/sunhome_dateicon" />
+
+  <ImageView
+      android:id="@+id/sunhome_dateicon"
+      android:layout_width="0dp"
+      android:layout_height="33dp"
+      android:scaleType="centerInside"
+      app:layout_constraintBottom_toBottomOf="@+id/btn_sunhome_addfav"
+      app:layout_constraintStart_toStartOf="@+id/lat_title"
+      app:layout_constraintTop_toTopOf="@+id/btn_sunhome_addfav"
+      app:srcCompat="@drawable/sun_home_date" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="20dp" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="393dp"
+      android:orientation="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintGuide_end="787dp"
+      app:layout_constraintStart_toEndOf="@+id/toolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,94 @@
 <resources>
+
     <string name="app_name">GroupProject</string>
     <string name="button1">Sunrise &amp; Sunset lookup \nBy: Zimeng Wang</string>
     <string name="button2">Recipe Search \nBy: Wenxin Li</string>
     <string name="button3">Dictionary API \nBy: Mengying Liu</string>
     <string name="button4">Deezer song search API \nBy: Yashan Wasson</string>
     <string name="hello_message">Welcome to the final project</string>
+
+    <!-- Dictionary -->
     <string name="translate_button">Translate</string>
     <string name="hint">Enter the word.</string>
-    <string name="home">Home</string>
     <string name="second">Saved Vocabulary</string>
     <string name="third">Help</string>
+    <string name="save_button">Save</string>
+    <string name="error_message">No result found, please try another word.</string>
+    <string name="API_name">Dictionary API</string>
+    <string name="instruction_title">Instruction for Dictionary API</string>
+    <string name="instruction_body">"1, Under \"New Search\" tab, please enter a word to start translating. If no result shown, Please enter a new word.\n\n2, You can press SAVE button to save a term to your own vocabulary for future review.\n\n3, You can manage your vocaburary under Vocabulary tab, and delete any term or all terms  you donnot need anymoew.\n "</string>
+    <string name="dialog_button_ok">Dismiss</string>
+    <string name="question_title">Question:</string>
+    <string name="question_body">Do you want to delete this term:  </string>
+    <string name="dialog_button_no">No</string>
+    <string name="dialog_button_yes">Yes</string>
+    <string name="snackbar_message">You deleted term: </string>
+    <string name="undo_button">UNDO</string>
+    <string name="save_successful">Vocabulary saved successfully.</string>
+    <string name="save_unsuccessful">Vocabulary already exists.</string>
+    <string name="delete_all_title">Empty the whole vocabulary.</string>
+    <string name="delete_all_body">Are you sure you want to empty the vocabulary?</string>
+    <string name="delete_all_after">The whole vocabulary is now empty.</string>
+    <string name="home_icon">Exit the app</string>
+    <string name="home_id">New Search</string>
+
+
+
+    <!-- Sunrise & Sunset -->
+    <!-- SunHome.java -->
+    <string name="sunhome_toast_enter_lat_long">Please enter latitude and longitude</string>
+    <string name="sunhome_toast_location_added">Location added to favourites</string>
+    <string name="sunhome_toast_error_adding_location">Location added to favourites</string>
+    <string name="sunhome_toast_lookup_location_first">Please lookup a location first</string>
+    <string name="sunhome_toast_error_occured">Error occurred: </string>
+    <string name="sunhome_input_time_format">hh:mm:ss a</string>
+    <string name="sunhome_output_time_format">hh:mm:ss a</string>
+    <string name="sunhome_toast_error_fetching_data">Error occurred while fetching data</string>
+    <string name="sunhome_date_format">yyyy-MM-dd</string>
+    <string name="sunhome_date" translatable="false">2024-04-01</string>
+    <!-- SunFav.java -->
+    <string name="sunhome_menutitle">SunCycle</string>
+    <string name="sunfav_delete">Delete Favourite Location</string>
+    <string name="sunfav_deleteconfirmation">Are you sure you want to delete this location?</string>
+    <string name="sunfav_deleteyes">Yes</string>
+    <string name="sunfav_deleteno">No</string>
+    <string name="sunfav_deleteundo">Undo</string>
+    <string name="sunfav_deleted">Location deleted</string>
+    <string name="sunfav_latformat">Lat: %1$f</string>
+    <string name="sunfav_lngformat">Lng: %1$f</string>
+    <!-- SunMenuHandler-->
+    <string name="sunmenu_about">About</string>
+    <string name="sunmenu_about_message">
+    Instructions for using the interface:\n\n
+    1. Enter the latitude and longitude of the desired location.\n\n
+    2. Click the Search button to retrieve the sunrise and sunset times.\n\n
+    3. Click the Add button to save the location to your favourites.\n\n
+    4. Use the menu options to navigate between screens.\n
+    </string>
+    <string name="sunmenu_message_ok_button">OK</string>
+    <!-- Sun_Home.xml-->
+    <string name="sunhome_latitude_label">Lat:</string>
+    <string name="sunhome_longitude_label">Lng:</string>
+    <string name="sunhome_add">Add</string>
+    <string name="sunhome_search_hint_lat">  Latitude</string>
+    <string name="sunhome_search_hint_lng">  Longitude</string>
+    <string name="sunhome_search">Search</string>
+    <string name="sunhome_favourites">Favourites</string>
+    <string name="sunhome_sunrise_label">SUNRISE</string>
+    <string name="sunhome_sunset_label">SUNSET</string>
+    <string name="sunhome_sunrise_time">sunrise time</string>
+    <string name="sunhome_sunset_time">sunset time</string>
+    <string name="sunhome_latitude">latitude</string>
+    <string name="sunhome_longitude">sunset time</string>
+    <!-- Sun_Fav.xml-->
+    <string name="sunfav_goback">Go Back</string>
+    <!-- Sun_menu.xml-->
+    <string name="sunmenu_icon_home">Home</string>
+    <string name="sunmenu_icon_about">About</string>
+    <!-- SunHomeTest.java-->
+    <string name="suntest_date" translatable="false">2024-06-08</string>
+    <string name="exit_message">Do you want to exit the APP and return to the main API entrance?</string>
+
 
     <!-- wenxinAPI Section   -->
     <string name="recipe_hint">Enter the name of recipe</string>

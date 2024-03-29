@@ -2,10 +2,29 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="SearchRecipeActivity">
+      <entry key="DictionaryTest">
+        <State />
+      </entry>
+      <entry key="SunHomeTest">
         <State />
       </entry>
       <entry key="app">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\jamie\.android\avd\Pixel_2_API_27.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-28T20:14:40.952100200Z" />
+        </State>
+      </entry>
+      <entry key="testDeleteFavouriteLocation()">
         <State />
       </entry>
     </value>

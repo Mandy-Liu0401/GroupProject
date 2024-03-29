@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: Zimeng Wang, Student ID: 041095956
+    Date: March 26, 2024
+    Lab Section: CST2335 - 021
+    Purpose: This layout is used for the SunFav activity, which lists all favorite locations saved by
+    the user.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="16dp">
+
+  <ImageView
+    android:id="@+id/display_delete"
+    android:layout_width="wrap_content"
+    android:layout_height="37dp"
+    android:layout_marginEnd="13dp"
+    android:scaleType="center"
+    android:scaleX="0.6"
+    android:scaleY="0.6"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/sun_fav_bin" />
+
+  <TextView
+    android:id="@+id/display_latitude"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:fontFamily="@font/roboto"
+    android:text="TextView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/display_longtitude"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto"
+    android:text="TextView"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/display_latitude"
+    app:layout_constraintTop_toBottomOf="@+id/display_latitude"
+    app:layout_constraintVertical_bias="0.0" />
+
+  <ImageButton
+    android:id="@+id/display_search"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp"
+    android:background="@drawable/sun_home_search"
+    android:scaleX="0.6"
+    android:scaleY="0.6"
+    app:layout_constraintBottom_toBottomOf="@+id/display_delete"
+    app:layout_constraintEnd_toStartOf="@+id/display_delete"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="1.0"
+    app:srcCompat="@drawable/sun_home_search" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
