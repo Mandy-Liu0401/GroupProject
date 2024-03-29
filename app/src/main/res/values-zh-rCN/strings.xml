@@ -23,6 +23,7 @@
     <string name="saved_list">已存列表</string>
     <string name="recipe_help">帮助</string>
     <string name="recipe_search">搜索</string>
+    <string name="home">主界面</string>
     <string name="recipe_deleted_prompt">食谱已删除</string>
     <string name="error">错误</string>
     <string name="error_parsing">食谱解析错误</string>
