@@ -14,8 +14,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-
-
             android:layout_marginBottom="160dp"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
@@ -52,8 +50,8 @@
 
         <TextView
             android:id="@+id/inDeatilSuammry"
-            android:layout_width="328dp"
-            android:layout_height="192dp"
+            android:layout_width="324dp"
+            android:layout_height="206dp"
 
 
             android:layout_marginStart="4dp"
@@ -64,34 +62,35 @@
 
         <TextView
             android:id="@+id/inDetailSourceURL"
-            android:layout_width="308dp"
-            android:layout_height="53dp"
+            android:layout_width="307dp"
+            android:layout_height="40dp"
+            android:textSize="15dp"
 
             android:layout_marginTop="4dp"
             android:text="@string/recipe_source_URL"
             android:textColor="@color/blue"
 
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/recipeRemoveButton"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inDeatilSuammry"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/recipeRemoveButton"
-            android:layout_width="81dp"
-            android:layout_height="38dp"
+            android:layout_width="98dp"
+            android:layout_height="40dp"
 
             android:layout_marginTop="132dp"
-            android:layout_marginEnd="16dp"
+            android:textSize="10dp"
 
-            android:text="@string/recipe_save"
+            android:text="@string/recipe_remove"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailImage"
-            app:layout_constraintVertical_bias="0.961" />
+            app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,8 +20,16 @@
     <string name="recipe_source_URL">Recipe URL</string>
     <string name="recipe_save">Save</string>
     <string name="recipe_remove">Remove</string>
-    <string name="saved_list">Saved Recipes List </string>
+    <string name="saved_list">Saved Recipes</string>
     <string name="recipe_help">Help</string>
+    <string name="recipe_search">Search</string>
+    <string name="search_recipe_title">Search Recipe</string>
+
+    <string name="recipe_deleted_prompt">Recipe deleted</string>
+    <string name="error">Error: </string>
+    <string name="error_parsing">Error parsing recipes: </string>
+    <string name="recipe_saved">Recipe saved</string>
+    <string name="recipe_help_info">Hello, welcome to the recipe query software! This software supports recipe search, view recipe details, save recipes to the favorites list, view details from the favorites list and support the management of favorite recipe data, and you can delete unnecessary recipes. The toolbar on the top can return to the main interface, search interface, collection interface and help prompt interface. Author: Li Wenxin Version: 1.8</string>
 
 
 </resources>
