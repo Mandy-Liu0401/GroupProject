@@ -99,7 +99,7 @@
 
         android:layout_marginTop="4dp"
         android:text="@string/recipe_source_URL"
-        android:textColor="@color/orange"
+        android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="@id/recipeSaveButton"
 
         app:layout_constraintEnd_toStartOf="@id/recipeSaveButton"

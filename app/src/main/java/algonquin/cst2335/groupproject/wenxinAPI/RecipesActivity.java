@@ -2,16 +2,12 @@ package algonquin.cst2335.groupproject.wenxinAPI;
 
 import androidx.annotation.NonNull;
 
-import android.app.Activity;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,13 +26,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -76,21 +72,14 @@ public class RecipesActivity extends AppCompatActivity {
         });
 
 
-
         initializeRecyclerView();
         //loadMessagesFromDatabase();
 
+        initializeSearchButtons();
 
-
-        initializeSendReceiveButtons();
-
-        // 假设您的EditText的id是edit_search
+        // set last search term into editText
         EditText searchField = findViewById(R.id.enterRecipe);
         searchField.setText(getLastSearchTerm());
-
-
-
-
 
 
     }
@@ -99,9 +88,9 @@ public class RecipesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.recipe_saved_icon) {
-//            Intent intent2 = new Intent(this, RecipesActivity.class);
-//            startActivity(intent2);
-//            return true;
+            Intent intent2 = new Intent(this, SavedRecipesActivity.class);
+            startActivity(intent2);
+            return true;
         } else if (item.getItemId() == R.id.home) {
             Intent homeIntent = new Intent(this, MainActivity.class);
             startActivity(homeIntent);
@@ -122,20 +111,35 @@ public class RecipesActivity extends AppCompatActivity {
         return true;
     }
 
-//    private void loadMessagesFromDatabase() {
+    //    private void loadMessagesFromDatabase() {
 //        Executor thread = Executors.newSingleThreadExecutor();
 //        thread.execute(() -> {
 //            ArrayList<Recipe> loadedMessages = (ArrayList<Recipe>) rDAO.getAllRecipes();
 //            runOnUiThread(() -> recipeViewModel.recipes.setValue(loadedMessages));
 //        });
 //    }
+    public void saveSearchTerm(String searchTerm) {
+        // 获取SharedPreferences实例，"AppPreferences"是文件名
+        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-    private void initializeSendReceiveButtons() {
+        // 使用键值对来保存搜索词，"LastSearchTerm"是键名
+        editor.putString("LastSearchTerm", searchTerm);
+
+        // 提交更改
+        editor.apply();
+    }
+
+    public String getLastSearchTerm() {
+        // 获取SharedPreferences实例
+        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
+
+        // 读取键名为"LastSearchTerm"的值，如果不存在则返回空字符串""
+        return sharedPreferences.getString("LastSearchTerm", "");
+    }
+
+    private void initializeSearchButtons() {
         binding.searchRecipeButton.setOnClickListener(v -> searchRecipe(true));
-
-
-
-
 
     }
 
@@ -165,24 +169,6 @@ public class RecipesActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void saveSearchTerm(String searchTerm) {
-        // 获取SharedPreferences实例，"AppPreferences"是文件名
-        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // 使用键值对来保存搜索词，"LastSearchTerm"是键名
-        editor.putString("LastSearchTerm", searchTerm);
-
-        // 提交更改
-        editor.apply();
-    }
-    public String getLastSearchTerm() {
-        // 获取SharedPreferences实例
-        SharedPreferences sharedPreferences = getSharedPreferences("RecipeSearchTerm", MODE_PRIVATE);
-
-        // 读取键名为"LastSearchTerm"的值，如果不存在则返回空字符串""
-        return sharedPreferences.getString("LastSearchTerm", "");
-    }
 
     private void parseRecipesResponse(JSONObject response) {
         //List<ChatMessage> recipesResult = new ArrayList<>();
@@ -317,12 +303,12 @@ public class RecipesActivity extends AppCompatActivity {
 
 
             String sourceURL = response.getString("sourceUrl");
-            String summary=response.getString("summary");
+            String summary = response.getString("summary");
 
 
             int recipeID = recipe.getRecipeID();
             String imageURL = recipe.getImageURL();
-            String title =recipe.getTitle();
+            String title = recipe.getTitle();
 
             Log.d("RecipesActivity", "解析完成，存入recipe");
             Recipe detailRecipe = new Recipe(title, imageURL, summary, sourceURL, recipeID);
@@ -337,15 +323,13 @@ public class RecipesActivity extends AppCompatActivity {
             showDetail(detailRecipe);
             Log.d("RecipesActivity", "parsing done  " + title);
 
-    } catch(
-    JSONException e)
+        } catch (
+                JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(RecipesActivity.this, "Error parsing recipes: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
-    {
-        e.printStackTrace();
-        Toast.makeText(RecipesActivity.this, "Error parsing recipes: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
-
-}
 
     public void showDetail(Recipe recipe) {
         Log.d("RecipesActivity", "show detail recipe " + recipe.getTitle());
@@ -368,6 +352,7 @@ public class RecipesActivity extends AppCompatActivity {
             try {
                 Log.d("RecipesActivity", "click save recipe");
                 rDAO.insertRecipe(recipe);
+                Snackbar.make(binding.getRoot(), "Recipe saved", Snackbar.LENGTH_LONG).show();
                 // 插入成功，注意，这里不更新UI，故不需要在UI线程中执行操作
                 Log.d("RecipesActivity", "Recipe saved successfully.");
             } catch (Exception e) {
