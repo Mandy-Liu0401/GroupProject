@@ -2,11 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Activity_DictionaryAPI">
+      <entry key="DictionaryTest">
         <State />
       </entry>
-
-
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -22,7 +20,6 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-03-28T20:14:40.952100200Z" />
         </State>
-
       </entry>
     </value>
   </component>
