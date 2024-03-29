@@ -114,7 +114,7 @@ public void setUp() {
     onView(withId(R.id.btn_sunhome_search)).perform(click());
     // Wait a moment for data to be saved
     try {
-      Thread.sleep(2000); // Wait for 2 seconds
+      Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -149,6 +149,12 @@ public void setUp() {
   @Test
   public void testDeleteFavouriteLocation() {
     addLocationToFavourites();
+    // Wait a moment for data to be saved
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     onView(withId(R.id.btn_sunhome_fav)).perform(click());
     onView(withId(R.id.rvFavouriteLocations))
         .perform(RecyclerViewActions.actionOnItemAtPosition(0, clickChildViewWithId(R.id.display_delete)));
@@ -164,6 +170,12 @@ public void setUp() {
     onView(withId(R.id.input_long)).perform(replaceText("-74.0060"), closeSoftKeyboard());
     // Click on the search button
     onView(withId(R.id.btn_sunhome_search)).perform(click());
+    // Wait a moment for data to be saved
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     // Assuming there's a button to add the current location to favourites
     onView(withId(R.id.btn_sunhome_addfav)).perform(click());
   }
