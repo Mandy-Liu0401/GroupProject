@@ -13,21 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject"
         tools:targetApi="31">
+
         <activity
-            android:name=".wenxinAPI.SavedRecipesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".wenxinAPI.RecipesActivity"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!-- Recipe Search  -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:name=".wenxinAPI.SavedRecipesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".wenxinAPI.RecipesActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>
