@@ -103,6 +103,7 @@
     <string name="recipe_help">Help</string>
     <string name="recipe_search">Search</string>
     <string name="search_recipe_title">Search Recipe</string>
+    <string name="home">Home</string>
 
     <string name="recipe_deleted_prompt">Recipe deleted</string>
     <string name="error">Error: </string>
