@@ -176,7 +176,7 @@ public class Activity_DictionaryAPI extends AppCompatActivity {
             Executor executor = Executors.newSingleThreadExecutor();
             executor.execute(() -> {
                 Vocabulary existingVocabulary = db.vDAO().findTermByInput(userInput);
-                if (existingVocabulary == null ) {
+                if (existingVocabulary == null && definitions != null) {
                     // Entry does not exist, so insert the new vocabulary
                     db.vDAO().insertTerm(vocabulary);
                     // display a message indicating successful insertion

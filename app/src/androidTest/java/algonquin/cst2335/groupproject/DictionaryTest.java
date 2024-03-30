@@ -1,3 +1,14 @@
+
+/**
+ * This page contains 5 Junit tests
+ *
+ * @author Mengying Liu
+ * @Student No. 041086143
+ * @date Mar 25, 2024
+ * @labSecNo. 021
+ * @purpose % Junit tests include button, menu, logic , and database functionalities.
+ *
+ */
 package algonquin.cst2335.groupproject;
 
 
