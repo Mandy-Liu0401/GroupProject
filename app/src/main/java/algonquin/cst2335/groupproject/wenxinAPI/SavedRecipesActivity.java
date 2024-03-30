@@ -97,6 +97,7 @@ public class SavedRecipesActivity extends AppCompatActivity {
             return true;
         }else if(item.getItemId() == R.id.search){
             Intent intent3 =new Intent(this, RecipesActivity.class);
+            startActivity(intent3);
             return true;
         }
         else if (item.getItemId() == R.id.recipe_saved_icon) {

@@ -58,7 +58,9 @@
 
             android:text="@string/recipe_summary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detailImage" />
+            app:layout_constraintTop_toTopOf="@id/detailImage"
+            app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView"
+            app:layout_constraintBottom_toTopOf="@id/inDetailSourceURL"/>
 
         <TextView
             android:id="@+id/inDetailSourceURL"
