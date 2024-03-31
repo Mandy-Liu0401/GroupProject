@@ -3,10 +3,10 @@ package algonquin.cst2335.groupproject.wenxinAPI;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
+
 import androidx.room.PrimaryKey;
 /**
  *

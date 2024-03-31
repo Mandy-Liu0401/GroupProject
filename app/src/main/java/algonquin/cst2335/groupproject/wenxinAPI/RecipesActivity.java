@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,22 +23,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.google.android.material.snackbar.Snackbar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivityRecipesBinding;
@@ -48,7 +40,7 @@ import algonquin.cst2335.groupproject.databinding.RecipeSearchBinding;
  *
  * Activity responsible for displaying and searching recipes.
  * It allows users to search for recipes via an external API, view the results in a list, and select a recipe to see detailed information.
- * Users can also save their favorite recipes to a local database for later viewing.mply displays "Hello World!" to the standard output.
+ * Users can also save their favorite recipes to a local database for later viewing.displays "Hello World!" to the standard output.
  *
  * @author  Wenxin Li
  * @version 1.6
@@ -373,9 +365,7 @@ public class RecipesActivity extends AppCompatActivity {
     public void showDetails(Recipe recipe) {
         Recipe searchDetailsRecipe =recipe;
         Intent detailIntent =new Intent(this,RecipeDetailsActivity.class);
-
         detailIntent.putExtra("RecipeDetails",searchDetailsRecipe);
-
         //this is for if to show save button
         detailIntent.putExtra("IsSaved", false);
         startActivity(detailIntent);
