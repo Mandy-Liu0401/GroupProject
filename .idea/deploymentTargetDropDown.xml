@@ -2,19 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DictionaryTest">
-        <State />
-      </entry>
       <entry key="MainActivityTest">
         <State />
       </entry>
-      <entry key="Recipe2Test">
-        <State />
-      </entry>
-      <entry key="RecipeTest">
-        <State />
-      </entry>
-      <entry key="SunHomeTest">
+      <entry key="RecipeActivityTest">
         <State />
       </entry>
       <entry key="app">
@@ -32,6 +23,15 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-03-28T20:14:40.952100200Z" />
         </State>
+      </entry>
+      <entry key="testNavigationToSavedRecipes()">
+        <State />
+      </entry>
+      <entry key="testReturnToMainActivityFromRecipeActivity()">
+        <State />
+      </entry>
+      <entry key="testSaveIcon()">
+        <State />
       </entry>
     </value>
   </component>

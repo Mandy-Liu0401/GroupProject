@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
@@ -134,7 +135,14 @@ public class SavedRecipesActivity extends AppCompatActivity {
         Executor thread = Executors.newSingleThreadExecutor();
         thread.execute(() -> {
             ArrayList<Recipe> savedRecipes = (ArrayList<Recipe>) rDAO.getAllRecipes();
-            runOnUiThread(() -> recipeViewModel.recipes.setValue(savedRecipes));
+            Log.d("SavedRecipesActivity", "Loaded recipes from DB: " + savedRecipes.size());
+
+            runOnUiThread(() -> {
+                recipeViewModel.recipes.setValue(savedRecipes);
+                if (savedRecipes.isEmpty()) {
+                    Toast.makeText(this, R.string.no_recipe_prompt, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
     /**
@@ -152,6 +160,7 @@ public class SavedRecipesActivity extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
+                Log.d("SavedRecipesActivity", "Loaded recipes: " + recipeViewModel.recipes.getValue().size());
                 Recipe recipe = recipeViewModel.recipes.getValue().get(position);
                 holder.recipeIDText.setText(Integer.toString(recipe.recipeID));
                 holder.recipeTitleText.setText(recipe.getTitle());
@@ -187,10 +196,11 @@ public class SavedRecipesActivity extends AppCompatActivity {
 
             itemView.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
-                Recipe recipe = recipeViewModel.recipes.getValue().get(position);
-                showSavedRecipeDetails(recipe);
+                Recipe savedRecipeDetails = recipeViewModel.recipes.getValue().get(position);
+                showSavedRecipeDetails(savedRecipeDetails);
             });
         }
+
     }
 
     /**
@@ -201,37 +211,46 @@ public class SavedRecipesActivity extends AppCompatActivity {
      * @param recipe The recipe to display in detail.
      */
     public void showSavedRecipeDetails(Recipe recipe) {
-        Log.d("SavedRecipesActivity", "show detail recipe " + recipe.getTitle());
-        binding.inDeatilSuammry.setText(recipe.getSummary());
-        binding.inDetailSourceURL.setText(recipe.getSourceURL());
+        Recipe savedRecipeToShow =recipe;
+        Intent detailIntent =new Intent(this,RecipeDetailsActivity.class);
 
-        String imageUrl = recipe.getImageURL() != null ? recipe.getImageURL() : "";
-        Glide.with(this).load(!imageUrl.isEmpty() ? imageUrl : R.drawable.recipe).into(binding.detailImage);
+        detailIntent.putExtra("RecipeDetails",savedRecipeToShow);
 
-        //setOnClickListener to save recipe in recipe details
-        binding.recipeRemoveButton.setOnClickListener(v -> removeRecipe(recipe));
+        //this is for is to show remove button
+        detailIntent.putExtra("IsSaved", true);
+        startActivity(detailIntent);
+
+//        Log.d("SavedRecipesActivity", "show detail recipe " + recipe.getTitle());
+//        binding.inDeatilSuammry.setText(recipe.getSummary());
+//        binding.inDetailSourceURL.setText(recipe.getSourceURL());
+//
+//        String imageUrl = recipe.getImageURL() != null ? recipe.getImageURL() : "";
+//        Glide.with(this).load(!imageUrl.isEmpty() ? imageUrl : R.drawable.recipe).into(binding.detailImage);
+//
+//        //setOnClickListener to save recipe in recipe details
+//        binding.recipeRemoveButton.setOnClickListener(v -> removeRecipe(recipe));
     }
 
-    /**
-     * Removes a recipe from the saved list and the local database asynchronously.
-     * Once removed, the UI is updated to reflect the change.
-     *
-     * @param recipe The recipe to remove.
-     */
-    public void removeRecipe(Recipe recipe) {
-        Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() -> {
-            Recipe recipeToDelete = recipe;
-            rDAO.deleteRecipe(recipeToDelete);
-            ArrayList<Recipe> updatedRecipes = new ArrayList<>(recipeViewModel.recipes.getValue());
-            //remove the recipe from list in recycle view
-            updatedRecipes.remove(recipeToDelete);
-            runOnUiThread(() -> {
-                //after deleted update list in recycle view
-                recipeViewModel.recipes.setValue(updatedRecipes);
-                Snackbar.make(binding.getRoot(), R.string.recipe_deleted_prompt, Snackbar.LENGTH_LONG).show();
-            });
-        });
-
-    }
+//    /**
+//     * Removes a recipe from the saved list and the local database asynchronously.
+//     * Once removed, the UI is updated to reflect the change.
+//     *
+//     * @param recipe The recipe to remove.
+//     */
+//    public void removeRecipe(Recipe recipe) {
+//        Executor thread = Executors.newSingleThreadExecutor();
+//        thread.execute(() -> {
+//            Recipe recipeToDelete = recipe;
+//            rDAO.deleteRecipe(recipeToDelete);
+//            ArrayList<Recipe> updatedRecipes = new ArrayList<>(recipeViewModel.recipes.getValue());
+//            //remove the recipe from list in recycle view
+//            updatedRecipes.remove(recipeToDelete);
+//            runOnUiThread(() -> {
+//                //after deleted update list in recycle view
+//                recipeViewModel.recipes.setValue(updatedRecipes);
+//                Snackbar.make(binding.getRoot(), R.string.recipe_deleted_prompt, Snackbar.LENGTH_LONG).show();
+//            });
+//        });
+//
+//    }
 }
