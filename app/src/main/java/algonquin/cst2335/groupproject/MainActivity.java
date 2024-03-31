@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.item_1) {
-            Intent intent = new Intent(MainActivity.this, SunHome.class);
+            Intent intent = new Intent(this, SunHome.class);
             startActivity(intent);
         }
 

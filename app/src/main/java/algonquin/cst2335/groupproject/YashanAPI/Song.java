@@ -1,11 +1,15 @@
+
 package algonquin.cst2335.groupproject.YashanAPI;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Song {
+public class Song implements Parcelable  {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int songId;
@@ -74,5 +78,40 @@ public class Song {
 
     public void setAlbumCoverUrl(String albumCoverUrl) {
         this.albumCoverUrl = albumCoverUrl;
+    }
+    protected Song(Parcel in) {
+        songId = in.readInt();
+        title = in.readString();
+        artist = in.readString();
+        duration = in.readInt();
+        albumName = in.readString();
+        albumCoverUrl = in.readString();
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(songId);
+        dest.writeString(title);
+        dest.writeString(artist);
+        dest.writeInt(duration);
+        dest.writeString(albumName);
+        dest.writeString(albumCoverUrl);
     }
 }

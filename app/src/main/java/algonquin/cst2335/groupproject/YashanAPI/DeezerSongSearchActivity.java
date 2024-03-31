@@ -1,5 +1,6 @@
 package algonquin.cst2335.groupproject.YashanAPI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,8 +34,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
+import algonquin.cst2335.groupproject.YashanAPI.SavedSongsActivity;
+import algonquin.cst2335.groupproject.YashanAPI.Song;
+import algonquin.cst2335.groupproject.YashanAPI.SongDAO;
+import algonquin.cst2335.groupproject.YashanAPI.SongDatabase;
+import algonquin.cst2335.groupproject.YashanAPI.SongDetailsActivity;
+import algonquin.cst2335.groupproject.YashanAPI.SongViewModel;
 import algonquin.cst2335.groupproject.databinding.ActivityDeezerSongSearchBinding;
 import algonquin.cst2335.groupproject.databinding.SongItemBinding;
 
@@ -45,6 +52,8 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
     private SongDatabase database;
     private SongDAO songDAO;
     private RequestQueue requestQueue;
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_SEARCH_TERM = "search_term";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,18 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
         setTitle(R.string.search_songs);
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("DeezerSearchTerm", Context.MODE_PRIVATE);
+
+        // Populate the search field with the last search term
+        String lastSearchTerm = getLastSearchTerm();
+        binding.searchEditText.setText(lastSearchTerm);
+
+        Button searchButton = findViewById(R.id.searchButton);
+        searchButton.setEnabled(true); // Ensure the button is enabled
+        searchButton.setClickable(true); // Ensure the button is clickable
+        searchButton.setOnClickListener(v -> searchSongs(v));
 
         database = Room.databaseBuilder(getApplicationContext(), SongDatabase.class, "deezer_song_db").build();
         songDAO = database.SongDAO();
@@ -114,6 +135,7 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
     public void searchSongs(View view) {
         String query = binding.searchEditText.getText().toString().trim();
         if (!query.isEmpty()) {
+            saveSearchTerm(query); // Save the search term to SharedPreferences
             requestQueue = Volley.newRequestQueue(this);
             String url = "https://api.deezer.com/search/track/?q=" + query;
 
@@ -151,18 +173,16 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
     }
 
     private void saveSearchTerm(String searchTerm) {
-        SharedPreferences sharedPreferences = getSharedPreferences("DeezerSearchTerm", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("LastSearchTerm", searchTerm);
+        editor.putString(PREF_SEARCH_TERM, searchTerm);
         editor.apply();
     }
 
     private String getLastSearchTerm() {
-        SharedPreferences sharedPreferences = getSharedPreferences("DeezerSearchTerm", MODE_PRIVATE);
-        return sharedPreferences.getString("LastSearchTerm", "");
+        return sharedPreferences.getString(PREF_SEARCH_TERM, "");
     }
 
-    class MyRowHolder extends RecyclerView.ViewHolder {
+    class MyRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView songTitle;
         TextView songArtist;
         TextView songAlbum;
@@ -174,6 +194,22 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
             songArtist = itemView.findViewById(R.id.songArtistText);
             songAlbum = itemView.findViewById(R.id.songAlbumText);
             albumCover = itemView.findViewById(R.id.albumCoverImageView);
+
+            // Set OnClickListener
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            // Handle item click
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Song clickedSong = songViewModel.songs.getValue().get(position);
+                // Start SongDetailsActivity with song details
+                Intent intent = new Intent(itemView.getContext(), SongDetailsActivity.class);
+                intent.putExtra("song", clickedSong);
+                itemView.getContext().startActivity(intent);
+            }
         }
     }
 }

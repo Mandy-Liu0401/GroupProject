@@ -172,6 +172,7 @@
     <string name="song_album">song titlr\n</string>
     <string name="saved_songs">song\n</string>
     <string name="no_saved_songs_prompt">there are no saved songs\n</string>
+    <string name="search_artists">search artist\n</string>
 
 
 </resources>
