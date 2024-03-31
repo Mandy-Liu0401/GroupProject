@@ -33,7 +33,7 @@
     <!-- SunHome.java -->
     <string name="sunhome_toast_enter_lat_long">Please enter latitude and longitude</string>
     <string name="sunhome_toast_location_added">Location added to favourites</string>
-    <string name="sunhome_toast_error_adding_location">Location added to favourites</string>
+    <string name="sunhome_toast_error_adding_location">Location not added to favourites</string>
     <string name="sunhome_toast_lookup_location_first">Please lookup a location first</string>
     <string name="sunhome_toast_error_occured">Error occurred: </string>
     <string name="sunhome_input_time_format">hh:mm:ss a</string>

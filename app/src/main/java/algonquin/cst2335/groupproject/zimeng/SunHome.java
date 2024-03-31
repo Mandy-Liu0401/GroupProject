@@ -87,22 +87,8 @@ public class SunHome extends AppCompatActivity {
       doSunriseSunsetQuery(latitude, longitude);
     }
 
-
-    // If there are saved latitude and longitude, automatically perform a sunrise/sunset query
+    // Initialize the Room database to manage favourite locations.
     db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "favourite-locations-db").allowMainThreadQueries().build();
-
-    // Setup listener for the search button to perform sunrise and sunset time query
-    binding.btnSunhomeSearch.setOnClickListener(v -> {
-      String latitude = binding.inputLat.getText().toString();
-      String longitude = binding.inputLong.getText().toString();
-
-      // Validate input before performing the query
-      if (!latitude.isEmpty() && !longitude.isEmpty()) {
-        lookupSunriseSunset(latitude, longitude);
-      } else {
-        Toast.makeText(SunHome.this, R.string.sunhome_toast_enter_lat_long, Toast.LENGTH_SHORT).show();
-      }
-    });
 
     // Setting up listeners
     binding.btnSunhomeSearch.setOnClickListener(v -> handleSearchButtonClick());
