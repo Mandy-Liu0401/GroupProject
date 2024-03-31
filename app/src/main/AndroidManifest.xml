@@ -15,8 +15,18 @@
         android:theme="@style/Theme.GroupProject"
         tools:targetApi="31">
         <activity
-            android:name=".wenxinAPI.RecipeDetailsActivity"
+            android:name=".YashanAPI.SongDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GroupProject" />
+        <activity
+            android:name=".YashanAPI.SavedSongsActivity"
             android:exported="false" />
+        <activity
+            android:name=".YashanAPI.DeezerSongSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".wenxinAPI.RecipeDetailsActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -31,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".wenxinAPI.RecipesActivity"
-            android:exported="true"></activity> <!-- DictionaryAPI -->
+            android:exported="true" /> <!-- DictionaryAPI -->
         <activity android:name=".mengyingAPI.Activity_DictionaryAPI" />
         <activity
             android:name=".mengyingAPI.Activity_Saved_Vocabulary"

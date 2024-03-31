@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import algonquin.cst2335.groupproject.YashanAPI.DeezerSongSearchActivity;
+import algonquin.cst2335.groupproject.YashanAPI.DeezerSongSearchActivity;
 import algonquin.cst2335.groupproject.wenxinAPI.RecipesActivity;
 import algonquin.cst2335.groupproject.zimeng.SunHome;
 import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.item_1) {
-            Intent intent = new Intent(MainActivity.this, SunHome.class);
+            Intent intent = new Intent(this, SunHome.class);
             startActivity(intent);
         }
 
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.item_4) {
+            Intent intent = new Intent(this, DeezerSongSearchActivity.class);
+            startActivity(intent);
 
         }
         return super.onOptionsItemSelected(item);
