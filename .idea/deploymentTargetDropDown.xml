@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DictionaryTest">
+      <entry key="MainActivityTest">
         <State />
       </entry>
-      <entry key="SunHomeTest">
+      <entry key="RecipeActivityTest">
         <State />
       </entry>
       <entry key="app">
@@ -24,7 +24,13 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-28T20:14:40.952100200Z" />
         </State>
       </entry>
-      <entry key="testDeleteFavouriteLocation()">
+      <entry key="testNavigationToSavedRecipes()">
+        <State />
+      </entry>
+      <entry key="testReturnToMainActivityFromRecipeActivity()">
+        <State />
+      </entry>
+      <entry key="testSaveIcon()">
         <State />
       </entry>
     </value>

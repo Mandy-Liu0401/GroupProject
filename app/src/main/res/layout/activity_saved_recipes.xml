@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+@author Wenxin Li
+@Student No. 040941091
+@date Mar 30, 2024
+@labSecNo. 021
+@purpose It manages the format for recipe details display page
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +20,7 @@
             android:id="@+id/recipeToolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
+            android:backgroundTint="#B2FFEB3B"
             android:layout_marginBottom="160dp"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
@@ -27,70 +34,16 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecipeRecycleView"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recipeToolbar" />
-
-        <ImageView
-            android:id="@+id/detailImage"
-
-            android:layout_width="74dp"
-            android:layout_height="69dp"
+            app:layout_constraintTop_toBottomOf="@id/recipeToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-            android:layout_marginTop="16dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/inDeatilSuammry"
-            app:layout_constraintTop_toBottomOf="@id/RecipeRecycleView"
-            app:srcCompat="@drawable/recipe" />
-
-        <TextView
-            android:id="@+id/inDeatilSuammry"
-            android:layout_width="324dp"
-            android:layout_height="206dp"
 
 
-            android:layout_marginStart="4dp"
-
-            android:text="@string/recipe_summary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detailImage" />
-
-        <TextView
-            android:id="@+id/inDetailSourceURL"
-            android:layout_width="307dp"
-            android:layout_height="40dp"
-            android:textSize="15dp"
-
-            android:layout_marginTop="4dp"
-            android:text="@string/recipe_source_URL"
-            android:textColor="@color/blue"
-
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/recipeRemoveButton"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inDeatilSuammry"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            android:id="@+id/recipeRemoveButton"
-            android:layout_width="98dp"
-            android:layout_height="40dp"
-
-            android:layout_marginTop="132dp"
-            android:textSize="10dp"
-
-            android:text="@string/recipe_remove"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailImage"
-            app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

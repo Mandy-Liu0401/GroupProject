@@ -8,6 +8,8 @@
 
     <style name="Theme.GroupProject" parent="Base.Theme.GroupProject" />
 
+
+
     <!-- Sunrise & Sunset -->
     <style name="Theme.Sun" parent="Base.Theme.GroupProject">
         <item name="titleTextColor">@color/titleTextColor</item>

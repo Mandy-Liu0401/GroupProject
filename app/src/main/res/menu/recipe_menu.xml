@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+@author Wenxin Li
+@Student No. 040941091
+@date Mar 30, 2024
+@labSecNo. 021
+@purpose It manages the format for recipe menue
+-->
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 

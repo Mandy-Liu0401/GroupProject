@@ -33,7 +33,6 @@
     <string name="home_id">New Search</string>
 
 
-
     <!-- Sunrise & Sunset -->
     <!-- SunHome.java -->
     <string name="sunhome_toast_enter_lat_long">Please enter latitude and longitude</string>
@@ -104,12 +103,21 @@
     <string name="recipe_search">Search</string>
     <string name="search_recipe_title">Search Recipe</string>
     <string name="home">Home</string>
-
+    <string name="text_id">ID:</string>
+    <string name="text_title">Title:</string>
     <string name="recipe_deleted_prompt">Recipe deleted</string>
     <string name="error">Error: </string>
     <string name="error_parsing">Error parsing recipes: </string>
     <string name="recipe_saved">Recipe saved</string>
-    <string name="recipe_help_info">Hello, welcome to the recipe query software! This software supports recipe search, view recipe details, save recipes to the favorites list, view details from the favorites list and support the management of favorite recipe data, and you can delete unnecessary recipes. The toolbar on the top can return to the main interface, search interface, collection interface and help prompt interface. Author: Li Wenxin Version: 1.8</string>
+    <string name="no_recipe_prompt">There is no recipe saved!</string>
+    <string name="recipe_help_info">
+    Instructions for using the interface:\n\n
+    1. Enter the name of the recipe you would like to search.\n\n
+    2. Click the Search button to see possible result.\n\n
+    3. Click the save button to save the recipe.\n\n
+    4. Use the menu options to navigate between screens.\n
+    </string>
+
 
 
 </resources>

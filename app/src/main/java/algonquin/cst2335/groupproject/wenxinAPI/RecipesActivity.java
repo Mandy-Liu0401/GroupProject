@@ -3,6 +3,7 @@ package algonquin.cst2335.groupproject.wenxinAPI;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -167,7 +170,7 @@ public class RecipesActivity extends AppCompatActivity {
         String searchTerm = searchField.getText().toString();
         saveSearchTerm(searchTerm);
 
-        String url = "https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&apiKey=" + "abb4102db3714c6eb68729fbb6ad77fd";
+        String url = "https://api.spoonacular.com/recipes/complexSearch?query=" + query + "&apiKey=" + "c4b0e4aef58e44d6b73030321fae8094";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
@@ -303,7 +306,7 @@ public class RecipesActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         int queryID = recipe.getRecipeID();
 
-        String url = "https://api.spoonacular.com/recipes/" + queryID + "/information?apiKey=" + "abb4102db3714c6eb68729fbb6ad77fd";
+        String url = "https://api.spoonacular.com/recipes/" + queryID + "/information?apiKey=" + "c4b0e4aef58e44d6b73030321fae8094";
 
         Log.d("RecipesActivity", "Fetching details for recipe ID: " + queryID + " with URL: " + url);
 
@@ -334,7 +337,14 @@ public class RecipesActivity extends AppCompatActivity {
 
             //parsing request to get sourceURL and summary from api
             String sourceURL = response.getString("sourceUrl");
+            // Formatting the string from api
             String summary = response.getString("summary");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                summary = HtmlCompat.fromHtml(summary, HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
+            } else {
+                summary = Html.fromHtml(summary).toString();
+            }
+
 
 
             int recipeID = recipe.getRecipeID();
@@ -361,37 +371,16 @@ public class RecipesActivity extends AppCompatActivity {
      * @param recipe The recipe to display.
      */
     public void showDetails(Recipe recipe) {
-        Log.d("RecipesActivity", "show detail recipe " + recipe.getTitle());
-        binding.inDeatilSuammry.setText(recipe.getSummary());
-        binding.inDetailSourceURL.setText(recipe.getSourceURL());
+        Recipe searchDetailsRecipe =recipe;
+        Intent detailIntent =new Intent(this,RecipeDetailsActivity.class);
 
-        //if imageUrl is null, set a default image
-        String imageUrl = recipe.getImageURL() != null ? recipe.getImageURL() : "";
-        Glide.with(this)
-                .load(!imageUrl.isEmpty() ? imageUrl : R.drawable.recipe)
-                .into(binding.detailImage);
-        //user can click save if they like this recipe
-        binding.recipeSaveButton.setOnClickListener(v -> saveRecipe(recipe));
+        detailIntent.putExtra("RecipeDetails",searchDetailsRecipe);
+
+        //this is for if to show save button
+        detailIntent.putExtra("IsSaved", false);
+        startActivity(detailIntent);
+
     }
-    /**
-     * Saves a recipe to the local database for later viewing.
-     * This method runs asynchronously to avoid blocking the UI thread.
-     *
-     * @param recipe The recipe to save.
-     */
-    public void saveRecipe(Recipe recipe) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            try {
-                Log.d("RecipesActivity", "click save recipe");
-                rDAO.insertRecipe(recipe);
-                Snackbar.make(binding.getRoot(), R.string.recipe_saved, Snackbar.LENGTH_LONG).show();
-                Log.d("RecipesActivity", "Recipe saved successfully.");
-            } catch (Exception e) {
-                Log.e("RecipesActivity", "Error saving recipe: " + e.getMessage());
-            } finally {
-                executor.shutdown();
-            }
-        });
-    }
+
+
 }

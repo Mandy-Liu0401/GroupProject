@@ -24,17 +24,28 @@
     <string name="recipe_help">帮助</string>
     <string name="recipe_search">搜索</string>
     <string name="home">主界面</string>
+    <string name="text_id">食谱ID:</string>
+    <string name="text_title">食谱名称:</string>
     <string name="recipe_deleted_prompt">食谱已删除</string>
     <string name="error">错误</string>
     <string name="error_parsing">食谱解析错误</string>
     <string name="recipe_saved">食谱已保存</string>
-    <string name="recipe_help_info">你好，欢迎使用菜谱查询软件！这个软件支持菜谱搜索，菜谱详情查看，保存菜谱到收藏列表，从收藏列表中查看详情和支持收藏菜谱数据的管理，可以删除不需要的菜谱。顶上的工具栏可以返回到主界面，搜索界面，收藏界面和帮助提示界面。作者：李文昕 版本：1.8</string>
+    <string name="recipe_help_info">
+    界面使用说明\n\n
+    1. 输入您想要的菜谱名称。\n\n
+    2. 单击“搜索”按钮查看可能的结果。\n\n
+    3. 单击“保存”按钮保存配方。。\n\n
+    4. 使用菜单选项在屏幕之间导航。。\n
+    </string>
+
     <string name="search_recipe_title">搜索食谱</string>
     <string name="save_button">保存到我的词库</string>
     <string name="error_message">查询不到结果，请查询新词</string>
     <string name="API_name">字典</string>
     <string name="instruction_title">用户手册</string>
-    <string name="instruction_body">1， 在“新的查询”菜单下， 请输入需要查询的单词， 如果没有结果返回， 请输入新单词。 2，你可以点击“保存”按钮以添加单词到你的单词簿。 3，在“单词簿”下， 你可以浏览保存的单词，并点击单个单词来删除，或者点击“清空单词簿”来删除整个单词簿。</string>
+
+    <string name="instruction_body">
+        1， 在“新的查询”菜单下， 请输入需要查询的单词， 如果没有结果返回， 请输入新单词。 2，你可以点击“保存”按钮以添加单词到你的单词簿。 3，在“单词簿”下， 你可以浏览保存的单词，并点击单个单词来删除，或者点击“清空单词簿”来删除整个单词簿。</string>
     <string name="dialog_button_ok">已阅并关闭</string>
     <string name="question_title">提问：</string>
     <string name="question_body">是否要删除单词：</string>
@@ -99,7 +110,7 @@
     <string name="home_icon">退出此程序</string>
     <string name="home_id">新的查询</string>
     <string name="exit_message">是否关闭程序并回到主界面？</string>
-
+    <string name="no_recipe_prompt">目前没有保存的食谱</string>
 
 
 </resources>
