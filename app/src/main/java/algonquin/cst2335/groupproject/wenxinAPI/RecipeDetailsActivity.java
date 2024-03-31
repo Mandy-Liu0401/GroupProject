@@ -3,35 +3,21 @@ package algonquin.cst2335.groupproject.wenxinAPI;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
-import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.databinding.ActivityRecipeDetailsBinding;
-import algonquin.cst2335.groupproject.databinding.ActivityRecipesBinding;
+
 
 /**
  * This activity is used to display the details of a recipe. It allows users to view detailed information about a recipe,

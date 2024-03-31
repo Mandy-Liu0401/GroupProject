@@ -20,8 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -213,44 +211,11 @@ public class SavedRecipesActivity extends AppCompatActivity {
     public void showSavedRecipeDetails(Recipe recipe) {
         Recipe savedRecipeToShow =recipe;
         Intent detailIntent =new Intent(this,RecipeDetailsActivity.class);
-
         detailIntent.putExtra("RecipeDetails",savedRecipeToShow);
-
         //this is for is to show remove button
         detailIntent.putExtra("IsSaved", true);
         startActivity(detailIntent);
 
-//        Log.d("SavedRecipesActivity", "show detail recipe " + recipe.getTitle());
-//        binding.inDeatilSuammry.setText(recipe.getSummary());
-//        binding.inDetailSourceURL.setText(recipe.getSourceURL());
-//
-//        String imageUrl = recipe.getImageURL() != null ? recipe.getImageURL() : "";
-//        Glide.with(this).load(!imageUrl.isEmpty() ? imageUrl : R.drawable.recipe).into(binding.detailImage);
-//
-//        //setOnClickListener to save recipe in recipe details
-//        binding.recipeRemoveButton.setOnClickListener(v -> removeRecipe(recipe));
     }
 
-//    /**
-//     * Removes a recipe from the saved list and the local database asynchronously.
-//     * Once removed, the UI is updated to reflect the change.
-//     *
-//     * @param recipe The recipe to remove.
-//     */
-//    public void removeRecipe(Recipe recipe) {
-//        Executor thread = Executors.newSingleThreadExecutor();
-//        thread.execute(() -> {
-//            Recipe recipeToDelete = recipe;
-//            rDAO.deleteRecipe(recipeToDelete);
-//            ArrayList<Recipe> updatedRecipes = new ArrayList<>(recipeViewModel.recipes.getValue());
-//            //remove the recipe from list in recycle view
-//            updatedRecipes.remove(recipeToDelete);
-//            runOnUiThread(() -> {
-//                //after deleted update list in recycle view
-//                recipeViewModel.recipes.setValue(updatedRecipes);
-//                Snackbar.make(binding.getRoot(), R.string.recipe_deleted_prompt, Snackbar.LENGTH_LONG).show();
-//            });
-//        });
-//
-//    }
 }

@@ -9,64 +9,34 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-
-
-import static algonquin.cst2335.groupproject.SunHomeTest.clickChildViewWithId;
-
-import android.content.Intent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.Toolbar;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingRegistry;
-import androidx.test.espresso.IdlingResource;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.idling.CountingIdlingResource;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import algonquin.cst2335.groupproject.databinding.RecipeSearchBinding;
-import algonquin.cst2335.groupproject.mengyingAPI.Activity_DictionaryAPI;
-import algonquin.cst2335.groupproject.wenxinAPI.Recipe;
-import algonquin.cst2335.groupproject.wenxinAPI.RecipeDetailsActivity;
 import algonquin.cst2335.groupproject.wenxinAPI.RecipesActivity;
-import algonquin.cst2335.groupproject.wenxinAPI.SavedRecipesActivity;
-import algonquin.cst2335.groupproject.zimeng.SunFav;
 
 /**
  * This class performs integration tests on the RecipeActivity within the group project application.
@@ -90,7 +60,6 @@ public class RecipeActivityTest {
      */
     @Before
     public void clearRecipeInput() {
-
         onView(withId(R.id.enterRecipe)).perform(clearText());
     }
 
@@ -100,10 +69,7 @@ public class RecipeActivityTest {
      */
     @After
     public void resetAppUI() {
-        try {
             Espresso.pressBackUnconditionally();
-        } catch (Exception e) {
-        }
 
     }
 
