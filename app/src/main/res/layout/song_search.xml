@@ -16,7 +16,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dictionary" />
+        app:srcCompat="@drawable/songs" />
 
     <TextView
         android:id="@+id/song_title"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toEndOf="@id/album_cover"
         app:layout_constraintTop_toTopOf="@id/album_cover"
         app:layout_constraintVertical_bias="0.3"
-        tools:text="Song Title" />
+        tools:text="@string/Song_Title" />
 
     <TextView
         android:id="@+id/song_album"
@@ -42,6 +42,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/album_cover"
         app:layout_constraintTop_toBottomOf="@id/song_title"
-        tools:text="Song Album" />
+        tools:text="@string/Song_Album" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

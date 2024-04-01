@@ -1,4 +1,3 @@
-
 package algonquin.cst2335.groupproject.YashanAPI;
 
 import android.os.Parcel;
@@ -8,21 +7,87 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Represents a song entity.
+ */
 @Entity
-public class Song implements Parcelable  {
+public class Song implements Parcelable {
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int songId;
+
+    @ColumnInfo(name = "title")
     private String title;
+
+    @ColumnInfo(name = "artist")
     private String artist;
+
+    @ColumnInfo(name = "duration")
     private int duration;
+
+    @ColumnInfo(name = "albumName")
     private String albumName;
+
+    @ColumnInfo(name = "albumCoverUrl")
     private String albumCoverUrl;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public String getAlbumCoverUrl() {
+        return albumCoverUrl;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public void setAlbumCoverUrl(String albumCoverUrl) {
+        this.albumCoverUrl = albumCoverUrl;
+    }
+
+    /**
+     * Default constructor.
+     */
     public Song() {
         // Default constructor
     }
 
+    /**
+     * Parameterized constructor.
+     * @param songId The ID of the song.
+     * @param title The title of the song.
+     * @param artist The artist of the song.
+     * @param duration The duration of the song.
+     * @param albumName The name of the album.
+     * @param albumCoverUrl The URL of the album cover.
+     */
     public Song(int songId, String title, String artist, int duration, String albumName, String albumCoverUrl) {
         this.songId = songId;
         this.title = title;
@@ -32,53 +97,26 @@ public class Song implements Parcelable  {
         this.albumCoverUrl = albumCoverUrl;
     }
 
+    // Getters and setters
+
+    /**
+     * Get the ID of the song.
+     * @return The ID of the song.
+     */
     public int getSongId() {
         return songId;
     }
 
+    /**
+     * Set the ID of the song.
+     * @param songId The ID of the song.
+     */
     public void setSongId(int songId) {
         this.songId = songId;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    // Parcelable implementation
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getAlbumName() {
-        return albumName;
-    }
-
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public String getAlbumCoverUrl() {
-        return albumCoverUrl;
-    }
-
-    public void setAlbumCoverUrl(String albumCoverUrl) {
-        this.albumCoverUrl = albumCoverUrl;
-    }
     protected Song(Parcel in) {
         songId = in.readInt();
         title = in.readString();

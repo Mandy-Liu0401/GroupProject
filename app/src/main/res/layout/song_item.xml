@@ -11,26 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Song Title"/>
+        android:text="@string/song_title1"/>
 
     <TextView
         android:id="@+id/songArtistText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Song Artist"/>
+        android:text="@string/song_artist"/>
 
     <TextView
         android:id="@+id/songAlbumText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Song Album"/>
+        android:text="@string/song_album1"/>
 
     <ImageView
         android:id="@+id/albumCoverImageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/dictionary"/>
+        android:src="@drawable/songs"/>
 
 </LinearLayout>
