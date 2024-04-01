@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import algonquin.cst2335.groupproject.MainActivity;
 import algonquin.cst2335.groupproject.R;
 import algonquin.cst2335.groupproject.YashanAPI.SavedSongsActivity;
 import algonquin.cst2335.groupproject.YashanAPI.Song;
@@ -44,6 +45,10 @@ import algonquin.cst2335.groupproject.YashanAPI.SongViewModel;
 import algonquin.cst2335.groupproject.databinding.ActivityDeezerSongSearchBinding;
 import algonquin.cst2335.groupproject.databinding.SongItemBinding;
 
+/**
+ * This activity allows users to search for songs using the Deezer API and displays the search results.
+ * Users can click on a song to view its details.
+ */
 public class DeezerSongSearchActivity extends AppCompatActivity {
 
     private ActivityDeezerSongSearchBinding binding;
@@ -89,22 +94,56 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
         initializeRecyclerView();
     }
 
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_deezer_song_search, menu);
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here.
+     */
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_saved_songs) {
-            startActivity(new Intent(DeezerSongSearchActivity.this, SavedSongsActivity.class));
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.home_Button) {
+            // Navigate to DeezerSongSearchActivity
+            Intent homeIntent = new Intent(this, MainActivity.class);
+            startActivity(homeIntent);
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+        } else if (id == R.id.menu_saved_songs) {
+            // Navigate to SavedSongsActivity
+            Intent savedIntent = new Intent(this, SavedSongsActivity.class);
+            startActivity(savedIntent);
+            return true;
+        } else if (id == R.id.help) {
+            // Show help dialog
+            showHelpDialog();
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Display the help dialog with instructions on how to use the interface.
+     */
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Help");
+        builder.setMessage(getString(R.string.help_dialog_message));
+
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    /**
+     * Initialize the RecyclerView to display search results.
+     */
     private void initializeRecyclerView() {
         myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
@@ -132,6 +171,9 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(myAdapter);
     }
 
+    /**
+     * Perform a song search based on the user-entered query.
+     */
     public void searchSongs(View view) {
         String query = binding.searchEditText.getText().toString().trim();
         if (!query.isEmpty()) {
@@ -172,16 +214,25 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Save the search term to SharedPreferences.
+     */
     private void saveSearchTerm(String searchTerm) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_SEARCH_TERM, searchTerm);
         editor.apply();
     }
 
+    /**
+     * Retrieve the last search term from SharedPreferences.
+     */
     private String getLastSearchTerm() {
         return sharedPreferences.getString(PREF_SEARCH_TERM, "");
     }
 
+    /**
+     * ViewHolder class for holding views of each row in the RecyclerView.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView songTitle;
         TextView songArtist;
@@ -207,7 +258,7 @@ public class DeezerSongSearchActivity extends AppCompatActivity {
                 Song clickedSong = songViewModel.songs.getValue().get(position);
                 // Start SongDetailsActivity with song details
                 Intent intent = new Intent(itemView.getContext(), SongDetailsActivity.class);
-                intent.putExtra("song", clickedSong);
+                intent.putExtra(getString(R.string.song), clickedSong);
                 itemView.getContext().startActivity(intent);
             }
         }

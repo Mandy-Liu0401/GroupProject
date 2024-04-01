@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -23,8 +23,24 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="Saved Songs"
+        app:title="@string/Saved_Songs"
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="545dp"
+        android:layout_marginBottom="130dp"
+        android:text="@string/Delete_song"
+        app:layout_constraintBottom_toBottomOf="@+id/savedSongsRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/savedSongsRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/savedSongsRecyclerView"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

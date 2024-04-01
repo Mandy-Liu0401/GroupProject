@@ -111,6 +111,32 @@
     <string name="home_id">新的查询</string>
     <string name="exit_message">是否关闭程序并回到主界面？</string>
     <string name="no_recipe_prompt">目前没有保存的食谱</string>
+    <string name="first_fragment_label">第一个片段</string>
+    <string name="second_fragment_label">第二个片段</string>
+    <string name="next">" 下一个"</string>
+    <string name="previous">以前的</string>
+    <string name="lorem_ipsum">[...]</string>
+    <string name="song_details_title">歌曲详情</string>
+    <string name="song_saved">歌曲保存成功</string>
+    <string name="song_deleted_prompt">" 歌曲已删除"</string>
+    <string name="search_songs">" 搜索歌曲"</string>
+    <string name="song_help_info">这是“歌曲详细信息”活动的帮助信息</string>
+    <string name="song_title">歌名</string>
+    <string name="song_album">歌名</string>
+    <string name="saved_songs">索格</string>
+    <string name="no_saved_songs_prompt">没有保存的歌曲</string>
+    <string name="search_artists">搜索艺术家</string>
+    <string name="search">搜索</string>
+    <string name="search_songs_ht">" 搜索歌曲"</string>
+    <string name="save">节省</string>
+    <string name="duration">期间</string>
+    <string name="album">专辑</string>
+    <string name="artist">" 艺术家"</string>
+    <string name="title">标题</string>
+    <string name="song_artist">歌曲艺术家</string>
+    <string name="song_album1">歌曲专辑</string>
+    <string name="song_title1">歌名</string>
+    <string name="help_dialog_message">欢迎来到“已保存歌曲”界面！</string>
 
 
 </resources>

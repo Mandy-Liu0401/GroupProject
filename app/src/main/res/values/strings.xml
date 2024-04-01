@@ -173,6 +173,31 @@
     <string name="saved_songs">song\n</string>
     <string name="no_saved_songs_prompt">there are no saved songs\n</string>
     <string name="search_artists">search artist\n</string>
+    <string name="search">Search</string>
+    <string name="search_songs_ht">Search Songs</string>
+    <string name="save">Save</string>
+    <string name="duration">Duration</string>
+    <string name="album">Album</string>
+    <string name="artist">Artist</string>
+    <string name="title">Title</string>
+    <string name="song_artist">Song Artist</string>
+    <string name="song_album1">Song Album</string>
+    <string name="song_title1">Song Title</string>
+    <string name="help_dialog_message">Welcome to the Saved Songs interface!\n\nThis interface allows you to view and manage your saved songs.\n\nHere\'s how to use it:\n\n- Saved Songs List: You can view your saved songs listed in the main area of the screen. Each song is displayed with its title, artist, and album.\n\n- Deleting Songs: To delete a song from your saved list, simply tap on the \'Delete\' button next to the song you want to remove.\n\n- Navigation: You can navigate back to the Deezer Song Search interface by selecting the \'Home\' button in the toolbar.\n\n- Help: If you need assistance or have any questions, you can always access this Help dialog by selecting the \'Help\' option in the toolbar.\n\nThank you for using our app! Enjoy exploring your saved songs collection.</string>
+    <string name="song">song</string>
+    <string name="Saved_Songs">Saved Songs</string>
+    <string name="Home">home\n</string>
+    <string name="Help">help\n</string>
+    <string name="Song_Title">song title\n</string>
+    <string name="Song_Album">song album\n</string>
+    <string name="Deezer_Song_Search">deezer song search</string>
+    <string name="Delete_song">delete song</string>
+    <string name="Failed_to_save_song">failed to save song\n</string>
+    <string name="song_saved_succesfully">song saved succesfully</string>
+    <string name="OK">ok</string>
+    <string name="Instructions_for_how_to_use">Instructions for how to use</string>
+    <string name="Instructions_for_how_to_use_the_interface">Instructions for how to use the interface</string>
+    <string name="deezer_song_db">deezer song db</string>
 
 
 </resources>

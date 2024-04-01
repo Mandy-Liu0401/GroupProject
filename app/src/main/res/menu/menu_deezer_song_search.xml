@@ -2,8 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/home_Button"
+        android:icon="@drawable/home_song"
+        android:title="@string/Home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/help"
+        android:title="@string/Help"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_saved_songs"
-        android:title="Saved Songs"
-        android:icon="@drawable/dictionary"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/saved_song"
+        android:title="@string/Saved_Songs"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
-        android:hint="Search Songs"
+        android:hint="@string/search_songs_ht"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="4dp"
         android:enabled="true"
 
-        android:text="Search"
+        android:text="@string/search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="Toolbar Title"
+        app:title="@string/Deezer_Song_Search"
         app:titleTextColor="@android:color/white"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-16dp"
