@@ -337,8 +337,6 @@ public class RecipesActivity extends AppCompatActivity {
                 summary = Html.fromHtml(summary).toString();
             }
 
-
-
             int recipeID = recipe.getRecipeID();
             String imageURL = recipe.getImageURL();
             String title = recipe.getTitle();
