@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".YashanAPI.SavedSongsActivity">
 
+    <!-- RecyclerView to display saved songs -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savedSongsRecyclerView"
         android:layout_width="match_parent"
@@ -18,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!-- Toolbar for activity -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/savedSongsToolbar"
         android:layout_width="match_parent"
@@ -27,6 +30,7 @@
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Button to delete songs -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -41,6 +45,5 @@
         app:layout_constraintStart_toStartOf="@+id/savedSongsRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/savedSongsRecyclerView"
         tools:ignore="MissingConstraints" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

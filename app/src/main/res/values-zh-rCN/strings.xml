@@ -137,6 +137,20 @@
     <string name="song_album1">歌曲专辑</string>
     <string name="song_title1">歌名</string>
     <string name="help_dialog_message">欢迎来到“已保存歌曲”界面！</string>
+    <string name="song">歌曲</string>
+    <string name="Saved_Songs">保存的歌曲</string>
+    <string name="Home">家</string>
+    <string name="Help">帮助</string>
+    <string name="Song_Title">歌名</string>
+    <string name="Song_Album">歌曲专辑</string>
+    <string name="Deezer_Song_Search">Deezer 歌曲搜索</string>
+    <string name="Delete_song">删除歌曲</string>
+    <string name="Failed_to_save_song">保存歌曲失败</string>
+    <string name="song_saved_succesfully">歌曲保存成功</string>
+    <string name="OK">好的</string>
+    <string name="Instructions_for_how_to_use">使用说明</string>
+    <string name="Instructions_for_how_to_use_the_interface">有关如何使用界面的说明</string>
+    <string name="deezer_song_db">Deezer 歌曲数据库</string>
 
 
 </resources>

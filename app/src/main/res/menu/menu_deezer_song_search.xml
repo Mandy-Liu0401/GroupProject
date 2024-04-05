@@ -1,15 +1,21 @@
 <!-- menu_deezer_song_search.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Home button item -->
     <item
         android:id="@+id/home_Button"
         android:icon="@drawable/home_song"
         android:title="@string/Home"
         app:showAsAction="always" />
+
+    <!-- Help item -->
     <item
         android:id="@+id/help"
         android:title="@string/Help"
         app:showAsAction="never" />
+
+    <!-- Saved songs item -->
     <item
         android:id="@+id/menu_saved_songs"
         android:icon="@drawable/saved_song"

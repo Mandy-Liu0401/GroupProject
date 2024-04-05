@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- ImageView to display the album cover -->
     <ImageView
         android:id="@+id/album_cover"
         android:layout_width="wrap_content"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/songs" />
 
+    <!-- TextView to display the song title -->
     <TextView
         android:id="@+id/song_title"
         android:layout_width="0dp"
@@ -31,6 +33,7 @@
         app:layout_constraintVertical_bias="0.3"
         tools:text="@string/Song_Title" />
 
+    <!-- TextView to display the song album -->
     <TextView
         android:id="@+id/song_album"
         android:layout_width="0dp"
