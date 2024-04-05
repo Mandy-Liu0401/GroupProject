@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- TextView to display the song title -->
     <TextView
         android:id="@+id/songTitleText"
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         android:textSize="16sp"
         android:text="@string/song_title1"/>
 
+    <!-- TextView to display the song artist -->
     <TextView
         android:id="@+id/songArtistText"
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
         android:textSize="14sp"
         android:text="@string/song_artist"/>
 
+    <!-- TextView to display the song album name -->
     <TextView
         android:id="@+id/songAlbumText"
         android:layout_width="match_parent"
@@ -27,6 +30,7 @@
         android:textSize="14sp"
         android:text="@string/song_album1"/>
 
+    <!-- ImageView to display the album cover image -->
     <ImageView
         android:id="@+id/albumCoverImageView"
         android:layout_width="50dp"
